@@ -1,6 +1,9 @@
 package com.solvd.carservice.equipment;
 
+import com.solvd.carservice.price.Price;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Material {
 
@@ -8,7 +11,7 @@ public class Material {
     private String name;
     private BigDecimal quantity;
     private String unit;
-    private String serviceName;
+    private List<Price> prices;
 
     public Long getId() {
         return id;
@@ -42,11 +45,11 @@ public class Material {
         this.unit = unit;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public List<Price> getPrices() {
+        return prices;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setPrices(List<Price> prices) {
+        this.prices = prices;
     }
 }

@@ -1,11 +1,13 @@
 package com.solvd.carservice.equipment;
 
+import com.solvd.carservice.department.Department;
+
 public class Tool {
 
     private Long id;
     private String name;
     private Integer quantity;
-    private String department;
+    private Department department;
 
     public Long getId() {
         return id;
@@ -31,11 +33,11 @@ public class Tool {
         this.quantity = quantity;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 }

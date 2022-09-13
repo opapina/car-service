@@ -6,7 +6,6 @@ public class Department {
 
     private Long id;
     private String name;
-    private Integer countOfEmployee;
     private List<String> tools;
 
     public Long getId() {
@@ -23,14 +22,6 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getCountOfEmployee() {
-        return countOfEmployee;
-    }
-
-    public void setCountOfEmployee(Integer countOfEmployee) {
-        this.countOfEmployee = countOfEmployee;
     }
 
     public List<String> getTools() {

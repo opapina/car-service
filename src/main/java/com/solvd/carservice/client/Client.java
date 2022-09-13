@@ -1,5 +1,6 @@
 package com.solvd.carservice.client;
 
+import com.solvd.carservice.price.DiscountProgram;
 import com.solvd.carservice.vehicle.Car;
 
 import java.time.LocalDate;
@@ -11,10 +12,11 @@ public class Client {
     private String firstName;
     private String lastName;
     private LocalDate dob;
-
     private List<Car> cars;
     private LocalDate registrationDate;
     private List<String> performedServices;
+
+    private List<DiscountProgram> discountPrograms;
 
     public Long getId() {
         return id;
@@ -64,11 +66,11 @@ public class Client {
         this.registrationDate = registrationDate;
     }
 
-    public List<String> getPerformedServices() {
-        return performedServices;
+    public List<DiscountProgram> getDiscountPrograms() {
+        return discountPrograms;
     }
 
-    public void setPerformedServices(List<String> performedServices) {
-        this.performedServices = performedServices;
+    public void setDiscountPrograms(List<DiscountProgram> discountPrograms) {
+        this.discountPrograms = discountPrograms;
     }
 }

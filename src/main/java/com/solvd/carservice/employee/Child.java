@@ -1,6 +1,7 @@
 package com.solvd.carservice.employee;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Child {
 
@@ -8,6 +9,7 @@ public class Child {
     private String firstName;
     private String lastName;
     private LocalDate dob;
+    private List<Employee> employees;
 
     public Long getId() {
         return id;
@@ -39,5 +41,13 @@ public class Child {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

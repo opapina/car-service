@@ -1,16 +1,17 @@
 package com.solvd.carservice.price;
 
+import com.solvd.carservice.equipment.Material;
 import com.solvd.carservice.worktime.ServiceWorkTime;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 public class Price {
 
     private Long id;
     private ServiceWorkTime serviceWorkTime;
     private Boolean performedFlag;
-    private BigDecimal materialPrice;
-    private Double discount;
+    private List<Material> materials;
+    private List<DiscountProgram> discounts;
 
     public Long getId() {
         return id;
@@ -36,19 +37,27 @@ public class Price {
         this.performedFlag = performedFlag;
     }
 
-    public BigDecimal getMaterialPrice() {
-        return materialPrice;
+    public ServiceWorkTime getServiceWorkTime() {
+        return serviceWorkTime;
     }
 
-    public void setMaterialPrice(BigDecimal materialPrice) {
-        this.materialPrice = materialPrice;
+    public void setServiceWorkTime(ServiceWorkTime serviceWorkTime) {
+        this.serviceWorkTime = serviceWorkTime;
     }
 
-    public Double getDiscount() {
-        return discount;
+    public List<Material> getMaterials() {
+        return materials;
     }
 
-    public void setDiscount(Double discount) {
-        this.discount = discount;
+    public void setMaterials(List<Material> materials) {
+        this.materials = materials;
+    }
+
+    public List<DiscountProgram> getDiscounts() {
+        return discounts;
+    }
+
+    public void setDiscounts(List<DiscountProgram> discounts) {
+        this.discounts = discounts;
     }
 }

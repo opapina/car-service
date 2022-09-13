@@ -1,5 +1,7 @@
 package com.solvd.carservice.employee;
 
+import com.solvd.carservice.department.Department;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,7 +12,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private LocalDate dob;
-    private String department;
+    private Department department;
     private BigDecimal salary;
     private Integer experience;
     private String profession;
@@ -48,11 +50,11 @@ public class Employee {
         this.dob = dob;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
