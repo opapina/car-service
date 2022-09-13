@@ -8,7 +8,7 @@ public class Material {
     private String name;
     private BigDecimal quantity;
     private String unit;
-    private String serviceType;
+    private String serviceName;
 
     public Long getId() {
         return id;
@@ -42,11 +42,11 @@ public class Material {
         this.unit = unit;
     }
 
-    public String getServiceType() {
-        return serviceType;
+    public String getServiceName() {
+        return serviceName;
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 }

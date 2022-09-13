@@ -7,6 +7,8 @@ import java.util.List;
 public class DiscountProgram {
 
     private Long id;
+
+    private String name;
     private Double discount;
     private List<Client> clients;
 
@@ -16,6 +18,14 @@ public class DiscountProgram {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Double getDiscount() {

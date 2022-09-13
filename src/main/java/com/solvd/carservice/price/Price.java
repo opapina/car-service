@@ -1,13 +1,13 @@
 package com.solvd.carservice.price;
 
-import com.solvd.carservice.worktime.WorkedTime;
+import com.solvd.carservice.worktime.ServiceWorkTime;
 
 import java.math.BigDecimal;
 
 public class Price {
 
     private Long id;
-    private WorkedTime workedTime;
+    private ServiceWorkTime serviceWorkTime;
     private Boolean performedFlag;
     private BigDecimal materialPrice;
     private Double discount;
@@ -20,12 +20,12 @@ public class Price {
         this.id = id;
     }
 
-    public WorkedTime getWorkedTime() {
-        return workedTime;
+    public ServiceWorkTime getWorkedTime() {
+        return serviceWorkTime;
     }
 
-    public void setWorkedTime(WorkedTime workedTime) {
-        this.workedTime = workedTime;
+    public void setWorkedTime(ServiceWorkTime serviceWorkTime) {
+        this.serviceWorkTime = serviceWorkTime;
     }
 
     public Boolean getPerformedFlag() {

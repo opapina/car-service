@@ -1,14 +1,14 @@
 package com.solvd.carservice.worktime;
 
 import com.solvd.carservice.employee.Employee;
+import com.solvd.carservice.vehicle.Car;
 
-import java.math.BigDecimal;
-
-public class WorkedTime {
+public class ServiceWorkTime {
 
     private Long id;
     private String serviceName;
-    private BigDecimal servicePrice;
+
+    private Car car;
     private Integer hour;
     private Employee employee;
 
@@ -28,12 +28,12 @@ public class WorkedTime {
         this.serviceName = serviceName;
     }
 
-    public BigDecimal getServicePrice() {
-        return servicePrice;
+    public Car getCar() {
+        return car;
     }
 
-    public void setServicePrice(BigDecimal servicePrice) {
-        this.servicePrice = servicePrice;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public Integer getHour() {

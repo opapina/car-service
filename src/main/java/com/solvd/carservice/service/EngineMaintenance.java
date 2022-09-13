@@ -1,15 +1,14 @@
 package com.solvd.carservice.service;
 
 import com.solvd.carservice.vehicle.Car;
-import com.solvd.carservice.worktime.WorkedTime;
+import com.solvd.carservice.worktime.ServiceWorkTime;
 
 public class EngineMaintenance {
 
     private Long id;
-    private Car car;
     private Double volumeEngine;
     private String reason;
-    private WorkedTime workedTime;
+    private ServiceWorkTime serviceWorkTime;
 
     public Long getId() {
         return id;
@@ -17,14 +16,6 @@ public class EngineMaintenance {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
     }
 
     public Double getVolumeEngine() {
@@ -43,11 +34,11 @@ public class EngineMaintenance {
         this.reason = reason;
     }
 
-    public WorkedTime getWorkedTime() {
-        return workedTime;
+    public ServiceWorkTime getWorkedTime() {
+        return serviceWorkTime;
     }
 
-    public void setWorkedTime(WorkedTime workedTime) {
-        this.workedTime = workedTime;
+    public void setWorkedTime(ServiceWorkTime serviceWorkTime) {
+        this.serviceWorkTime = serviceWorkTime;
     }
 }

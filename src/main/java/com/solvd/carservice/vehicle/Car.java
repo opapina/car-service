@@ -7,7 +7,7 @@ public class Car {
     private String model;
     private String brand;
     private LocalDate year;
-    private String engineNumber;
+    private String vinCode;
 
     public String getModel() {
         return model;
@@ -33,11 +33,11 @@ public class Car {
         this.year = year;
     }
 
-    public String getEngineNumber() {
-        return engineNumber;
+    public String getVinCode() {
+        return vinCode;
     }
 
-    public void setEngineNumber(String engineNumber) {
-        this.engineNumber = engineNumber;
+    public void setVinCode(String vinCode) {
+        this.vinCode = vinCode;
     }
 }
