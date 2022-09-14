@@ -12,8 +12,6 @@ public class Employee {
     private String firstName;
     private String lastName;
     private LocalDate dob;
-    private Department department;
-    private BigDecimal salary;
     private Integer experience;
     private String profession;
     private List<Child> children;
@@ -48,22 +46,6 @@ public class Employee {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
     }
 
     public Integer getExperience() {

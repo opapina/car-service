@@ -1,12 +1,14 @@
 package com.solvd.carservice.department;
 
+import com.solvd.carservice.equipment.Tool;
+
 import java.util.List;
 
 public class Department {
 
     private Long id;
     private String name;
-    private List<String> tools;
+    private List<Tool> tools;
 
     public Long getId() {
         return id;
@@ -24,11 +26,11 @@ public class Department {
         this.name = name;
     }
 
-    public List<String> getTools() {
+    public List<Tool> getTools() {
         return tools;
     }
 
-    public void setTools(List<String> tools) {
+    public void setTools(List<Tool> tools) {
         this.tools = tools;
     }
 }

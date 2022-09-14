@@ -7,7 +7,6 @@ import java.util.List;
 public class DiscountProgram {
 
     private Long id;
-
     private String name;
     private Double discount;
     private List<Client> clients;

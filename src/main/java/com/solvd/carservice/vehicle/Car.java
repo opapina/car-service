@@ -1,13 +1,17 @@
 package com.solvd.carservice.vehicle;
 
+import com.solvd.carservice.service.Service;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class Car {
 
     private String model;
     private String brand;
-    private LocalDate year;
+    private LocalDate yearCreate;
     private String vinCode;
+    private List<Service> services;
 
     public String getModel() {
         return model;
@@ -25,12 +29,12 @@ public class Car {
         this.brand = brand;
     }
 
-    public LocalDate getYear() {
-        return year;
+    public LocalDate getYearCreate() {
+        return yearCreate;
     }
 
-    public void setYear(LocalDate year) {
-        this.year = year;
+    public void setYearCreate(LocalDate yearCreate) {
+        this.yearCreate = yearCreate;
     }
 
     public String getVinCode() {
@@ -39,5 +43,13 @@ public class Car {
 
     public void setVinCode(String vinCode) {
         this.vinCode = vinCode;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }

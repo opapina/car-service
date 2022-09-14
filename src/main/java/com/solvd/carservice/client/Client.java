@@ -14,9 +14,6 @@ public class Client {
     private LocalDate dob;
     private List<Car> cars;
     private LocalDate registrationDate;
-    private List<String> performedServices;
-
-    private List<DiscountProgram> discountPrograms;
 
     public Long getId() {
         return id;
@@ -64,13 +61,5 @@ public class Client {
 
     public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
-    }
-
-    public List<DiscountProgram> getDiscountPrograms() {
-        return discountPrograms;
-    }
-
-    public void setDiscountPrograms(List<DiscountProgram> discountPrograms) {
-        this.discountPrograms = discountPrograms;
     }
 }

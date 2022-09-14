@@ -8,7 +8,6 @@ public class CarService {
 
     private Long id;
     private String name;
-
     private List<Department> departments;
 
     public Long getId() {

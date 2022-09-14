@@ -1,17 +1,14 @@
 package com.solvd.carservice.price;
 
-import com.solvd.carservice.equipment.Material;
-import com.solvd.carservice.worktime.ServiceWorkTime;
+import com.solvd.carservice.service.Service;
 
 import java.util.List;
 
 public class Price {
 
     private Long id;
-    private ServiceWorkTime serviceWorkTime;
     private Boolean performedFlag;
-    private List<Material> materials;
-    private List<DiscountProgram> discounts;
+    private List<Service> services;
 
     public Long getId() {
         return id;
@@ -19,14 +16,6 @@ public class Price {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ServiceWorkTime getWorkedTime() {
-        return serviceWorkTime;
-    }
-
-    public void setWorkedTime(ServiceWorkTime serviceWorkTime) {
-        this.serviceWorkTime = serviceWorkTime;
     }
 
     public Boolean getPerformedFlag() {
@@ -37,27 +26,11 @@ public class Price {
         this.performedFlag = performedFlag;
     }
 
-    public ServiceWorkTime getServiceWorkTime() {
-        return serviceWorkTime;
+    public List<Service> getServices() {
+        return services;
     }
 
-    public void setServiceWorkTime(ServiceWorkTime serviceWorkTime) {
-        this.serviceWorkTime = serviceWorkTime;
-    }
-
-    public List<Material> getMaterials() {
-        return materials;
-    }
-
-    public void setMaterials(List<Material> materials) {
-        this.materials = materials;
-    }
-
-    public List<DiscountProgram> getDiscounts() {
-        return discounts;
-    }
-
-    public void setDiscounts(List<DiscountProgram> discounts) {
-        this.discounts = discounts;
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }
