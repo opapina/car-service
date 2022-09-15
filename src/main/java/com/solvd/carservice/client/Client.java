@@ -1,6 +1,4 @@
 package com.solvd.carservice.client;
-
-import com.solvd.carservice.price.DiscountProgram;
 import com.solvd.carservice.vehicle.Car;
 
 import java.time.LocalDate;
