@@ -1,7 +1,7 @@
 package com.solvd.carservice;
 
+import com.solvd.carservice.client.Client;
 import com.solvd.carservice.department.Department;
-import com.solvd.carservice.price.DiscountProgram;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class CarService {
     private Long id;
     private String name;
     private List<Department> departments;
-    private List<DiscountProgram> discountPrograms;
+    private List<Client> clients;
 
     public Long getId() {
         return id;
@@ -36,11 +36,11 @@ public class CarService {
         this.departments = department;
     }
 
-    public List<DiscountProgram> getDiscountPrograms() {
-        return discountPrograms;
+    public List<Client> getClients() {
+        return clients;
     }
 
-    public void setDiscountPrograms(List<DiscountProgram> discountPrograms) {
-        this.discountPrograms = discountPrograms;
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
     }
 }

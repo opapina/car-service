@@ -1,15 +1,10 @@
 package com.solvd.carservice.price;
 
-import com.solvd.carservice.client.Client;
-
-import java.util.List;
-
 public class DiscountProgram {
 
     private Long id;
     private String name;
     private Double discount;
-    private List<Client> clients;
 
     public Long getId() {
         return id;
@@ -33,13 +28,5 @@ public class DiscountProgram {
 
     public void setDiscount(Double discount) {
         this.discount = discount;
-    }
-
-    public List<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
     }
 }
