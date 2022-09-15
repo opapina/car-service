@@ -1,8 +1,5 @@
 package com.solvd.carservice.employee;
 
-import com.solvd.carservice.department.Department;
-
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
