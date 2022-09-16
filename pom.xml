@@ -5,17 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.solvd</groupId>
-    <artifactId>carservice</artifactId>
+    <artifactId>car-service</artifactId>
     <version>15.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <apache-logger-version>2.18.0</apache-logger-version>
         <apache-commons-lang3-version>3.12.0</apache-commons-lang3-version>
         <apache-commons-io-version>2.11.0</apache-commons-io-version>
+        <mysql-connector-java-version>8.0.30</mysql-connector-java-version>
     </properties>
 
     <dependencies>
@@ -39,6 +40,11 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${apache-commons-io-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java-version}</version>
         </dependency>
     </dependencies>
 

@@ -1,13 +1,16 @@
 package com.solvd.carservice.department;
 
+import com.solvd.carservice.employee.Employee;
+import com.solvd.carservice.equipment.Tool;
+
 import java.util.List;
 
 public class Department {
 
     private Long id;
     private String name;
-    private Integer countOfEmployee;
-    private List<String> tools;
+    private List<Tool> tools;
+    private List<Employee> employees;
 
     public Long getId() {
         return id;
@@ -25,19 +28,19 @@ public class Department {
         this.name = name;
     }
 
-    public Integer getCountOfEmployee() {
-        return countOfEmployee;
-    }
-
-    public void setCountOfEmployee(Integer countOfEmployee) {
-        this.countOfEmployee = countOfEmployee;
-    }
-
-    public List<String> getTools() {
+    public List<Tool> getTools() {
         return tools;
     }
 
-    public void setTools(List<String> tools) {
+    public void setTools(List<Tool> tools) {
         this.tools = tools;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

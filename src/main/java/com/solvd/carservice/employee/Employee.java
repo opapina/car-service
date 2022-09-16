@@ -1,6 +1,5 @@
 package com.solvd.carservice.employee;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,8 +9,6 @@ public class Employee {
     private String firstName;
     private String lastName;
     private LocalDate dob;
-    private String department;
-    private BigDecimal salary;
     private Integer experience;
     private String profession;
     private List<Child> children;
@@ -46,22 +43,6 @@ public class Employee {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
     }
 
     public Integer getExperience() {
