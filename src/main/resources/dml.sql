@@ -174,19 +174,19 @@ insert into prices(service_id,performed_flag) values (6,1),(7,1),(8,1),(9,1),(10
 delete from tools where id in (10,33,25);
 
 #delete from tools posission with department_id=15
-delete from tools where department_id=15;
+delete from tools where department_id = 15;
 
 SET SQL_SAFE_UPDATES = 0; -- because safe_updates was turn
 
 #delete from children posissions with first_name 'Yan'
-SET FOREIGN_KEY_CHECKS=0;-- to disable fk
+SET FOREIGN_KEY_CHECKS = 0;-- to disable fk
 delete from children  where first_name = 'Yan' ;
-SET FOREIGN_KEY_CHECKS=1; -- to re-enable fk
+SET FOREIGN_KEY_CHECKS = 1; -- to re-enable fk
 
 #delete from cliens posissions with first_name 'Igor'
-SET FOREIGN_KEY_CHECKS=0;-- to disable fk
+SET FOREIGN_KEY_CHECKS = 0;-- to disable fk
 delete from clients where first_name = 'Igor';
-SET FOREIGN_KEY_CHECKS=1; -- to re-enable fk
+SET FOREIGN_KEY_CHECKS = 1; -- to re-enable fk
 
 SET SQL_SAFE_UPDATES = 1; -- return safe_updates
 
@@ -203,105 +203,105 @@ delete from discount_programs where id in (1,11);
 delete from discount_programs where client_id in (8);
 
 #delete from cars posissions with year_create='2015-06-10'
-SET FOREIGN_KEY_CHECKS=0;-- to disable fk
-delete from cars where year_create='2015-06-10';
+SET FOREIGN_KEY_CHECKS = 0;-- to disable fk
+delete from cars where year_create = '2015-06-10';
 
 #delete from cars posissions with vin_code='ABTY12345GHJK885'
-delete from cars where vin_code='ABTY12345GHJK885';
-SET FOREIGN_KEY_CHECKS=1; -- to re-enable fk
+delete from cars where vin_code = 'ABTY12345GHJK885';
+SET FOREIGN_KEY_CHECKS = 1; -- to re-enable fk
 
 -- UPDATE
 
 #update name in car_services which id = 1
-update car_services set name='RenovateCar' where id=1; 
+update car_services set name = 'RenovateCar' where id = 1; 
 
 #update departments in departments which name is 'tuning department'
-update departments set name='cleaning department' where name='tuning department';
+update departments set name = 'cleaning department' where name = 'tuning department';
 
 #update experience of Employees with id = 3,7,12,10,36
-update employees set experience=0 where id in(3,7,12,10,36);
+update employees set experience = 0 where id in (3,7,12,10,36);
 
 #update profession of Employees with id = 3,8,15,20,26,39
-update employees set profession='cleaner' where id in(3,8,15,20,26,39);
+update employees set profession = 'cleaner' where id in (3,8,15,20,26,39);
 
 #update profession of Employees with department_id = 3
-update employees set profession='engineer' where department_id =3;
+update employees set profession = 'engineer' where department_id = 3;
 
 #update tools of Employees with id = 3,8,15,20,26,39
-update tools set name='scissors' where id in (3,8,15,20,26,39);
+update tools set name = 'scissors' where id in (3,8,15,20,26,39);
 
 #update registration_date of clients for dates 2021-04-09 and 2021-04-10
-update clients set registration_date='2022-09-09' where registration_date in ('2021-04-09', '2021-04-10');
+update clients set registration_date = '2022-09-09' where registration_date in ('2021-04-09', '2021-04-10');
 
 #update prices performed_flag for service_id=4 
-update prices set performed_flag=1 where service_id=4;
+update prices set performed_flag = 1 where service_id = 4;
 
 #update year_create for cars with id=5,15 
-update cars set year_create='2010-09-08' where id=5 or id=15;
+update cars set year_create = '2010-09-08' where id = 5 or id = 15;
 
 #update model car for brand BMW и client_id=1
-update cars set model='7' where brand='BMW' and client_id=1;
+update cars set model = '7' where brand = 'BMW' and client_id = 1;
 
 -- SELECT
 #select the name and lastname and prifession for department_id=4
-select first_name as Name, last_name as Surname, profession as profession from employees e where e.department_id=4;
+select first_name as name, last_name as surname, profession as profession from employees e where e.department_id = 4;
 
 #select the name and lastname and id alias table_number for all department_id in not null
-select first_name as Name, last_name as Surname, e.id as table_number from employees e where e.department_id is not null;
+select first_name as name, last_name as surname, e.id as table_number from employees e where e.department_id is not null;
 
 #select first_name of clients which registration_date is 2022-09-09
-select first_name as Name from clients c where c.registration_date='2022-09-09';
+select first_name as name from clients c where c.registration_date = '2022-09-09';
 
 #select first_name and last_name of clients which name contains 'a'
-select c.first_name as Name, c.last_name as Surname from clients c where c.first_name like '%a%';
+select c.first_name as name, c.last_name as surname from clients c where c.first_name like '%a%';
 
 #select name of materials and quantity for name start from 'p'
-select m.name as Material, m.quantity from materials m where m.name like 'p%';
+select m.name as material, m.quantity from materials m where m.name like 'p%';
 
 #select tools with id from 20 to 30 amd name contains 's'
 select t.id,t.name from tools t where id BETWEEN 20 AND 30 and t.name like'%s%';
 
 #select first_name of clients which have BMW
-select c.first_name as Name, c.last_name as Surname from clients c where c.id in (select ca.client_id from cars ca where brand='BMW');
+select c.first_name as name, c.last_name as surname from clients c where c.id in (select ca.client_id from cars ca where brand = 'BMW');
 
 #select  service name without materials
-select s.id as ID, s.name as NAME from services s where s.id in (select sm.service_id from service_material sm where sm.material_id is null);
+select s.id as id, s.name as name from services s where s.id in (select sm.service_id from service_material sm where sm.material_id is null);
 
 #select  children (name, dob) which parents accounter and last name starts 'D' 
-select c.first_name as NAME, c.dob as Date_Of_Birth from children c where c.id in 
+select c.first_name as name, c.dob as date_of_birth from children c where c.id in 
 		(select ec.child_id from employee_children ec where ec.employee_id in 
         (select e.id from employees e where e.profession='accounter' and e.last_name like 'D%'));
         
  #select clients from car_service  RenovateCar   and order by lastname
- select c.first_name as name ,c.last_name as surname from clients c where c.car_service_id=1 order by c.last_name;
+ select c.first_name as name ,c.last_name as surname from clients c where c.car_service_id = 1 order by c.last_name;
  
   #select clients from clients  which discaunt program SILVER or GOLD  and order by dob
-  select c.first_name as name, c.last_name as surname, dob as DATE_BIRTH from clients c where c.id in 
-					(select client_id from discount_programs d where d.name='Silver' or d.name='Gold') order by c.dob;
+  select c.first_name as name, c.last_name as surname, dob as date_birth from clients c where c.id in 
+					(select client_id from discount_programs d where d.name = 'Silver' or d.name = 'Gold') order by c.dob;
                     
 #select clients from clients and discaunt_programs  which discaunt program SILVER or GOLD  and order by dob with inner join    
-select c.first_name as name, c.last_name as surname, c.dob as DATE_BIRTH, dp.discount as Discount from clients c 
-inner join discount_programs dp on c.id=dp.client_id where dp.name='Silver' or dp.name='Gold' order by DATE_BIRTH;
+select c.first_name as name, c.last_name as surname, c.dob as date_birth, dp.discount as Discount from clients c 
+inner join discount_programs dp on c.id = dp.client_id where dp.name = 'Silver' or dp.name = 'Gold' order by DATE_BIRTH;
 
 #select clients info(last_name and regictration_date), cars, servises which service materials is null and group by services and 'RI' in name
-select cl.first_name as name, cl.last_name as surname, c.model as car_model, c.brand as car_brand, s.name as Service_name from clients cl
- inner join cars c on cl.id=c.client_id inner join service_car sr on c.id=sr.car_id inner join services s on sr.service_id=s.id
- inner join service_material on s.id=service_material.service_id where service_material.material_id is null group by s.name having s.name like '%RI%';
+select cl.first_name as name, cl.last_name as surname, c.model as car_model, c.brand as car_brand, s.name as service_name from clients cl
+ inner join cars c on cl.id = c.client_id inner join service_car sr on c.id = sr.car_id inner join services s on sr.service_id = s.id
+ inner join service_material on s.id = service_material.service_id where service_material.material_id is null group by s.name having s.name like '%RI%';
  
  #select  children (name, dob) which parents painter with left join order by children name
-select c.first_name as NAME, c.dob as Date_Of_Birth, e.first_name as Parents_name, e.profession as Parents_prof from children c 
-inner join employee_children ec on c.id=ec.child_id left join employees e on ec.employee_id=e.id where e.profession='painter' 
+select c.first_name as name, c.dob as date_of_birth, e.first_name as parents_name, e.profession as parents_prof from children c 
+inner join employee_children ec on c.id = ec.child_id left join employees e on ec.employee_id = e.id where e.profession = 'painter' 
 order by c.first_name desc;
 
 #union for employees and clients
-select c.first_name as name, c.last_name as surname, c.dob as Birth_day from clients c
+select c.first_name as name, c.last_name as surname, c.dob as birth_day from clients c
 union
-select e.first_name as name, e.last_name as surname, e.dob as Birth_day from employees e order by Birth_day;
+select e.first_name as name, e.last_name as surname, e.dob as birth_day from employees e order by birth_day;
 
 #union all for employees and children
-select e.first_name as name, e.last_name as surname, e.dob as Birth_day from employees e
+select e.first_name as name, e.last_name as surname, e.dob as birth_day from employees e
 union all
-select c.first_name as name, c.last_name as surname, c.dob as Birth_day from children c order by name desc;
+select c.first_name as name, c.last_name as surname, c.dob as birth_day from children c order by name desc;
 
 
 
