@@ -1,7 +1,7 @@
-package com.solvd.carservice.department;
+package com.solvd.carservice.domain.department;
 
-import com.solvd.carservice.employee.Employee;
-import com.solvd.carservice.equipment.Tool;
+import com.solvd.carservice.domain.employee.Employee;
+import com.solvd.carservice.domain.equipment.Tool;
 
 import java.util.List;
 

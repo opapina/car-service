@@ -1,17 +1,13 @@
-package com.solvd.carservice.employee;
+package com.solvd.carservice.domain.employee;
 
 import java.time.LocalDate;
-import java.util.List;
 
-public class Employee {
+public class Child {
 
     private Long id;
     private String firstName;
     private String lastName;
     private LocalDate dob;
-    private Integer experience;
-    private String profession;
-    private List<Child> children;
 
     public Long getId() {
         return id;
@@ -43,29 +39,5 @@ public class Employee {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
-    }
-
-    public Integer getExperience() {
-        return experience;
-    }
-
-    public void setExperience(Integer experience) {
-        this.experience = experience;
-    }
-
-    public String getProfession() {
-        return profession;
-    }
-
-    public void setProfession(String profession) {
-        this.profession = profession;
-    }
-
-    public List<Child> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<Child> children) {
-        this.children = children;
     }
 }

@@ -1,4 +1,4 @@
-package com.solvd.carservice.equipment;
+package com.solvd.carservice.domain.equipment;
 
 import java.math.BigDecimal;
 

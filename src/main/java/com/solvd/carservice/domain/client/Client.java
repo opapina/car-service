@@ -1,6 +1,6 @@
-package com.solvd.carservice.client;
-import com.solvd.carservice.price.DiscountProgram;
-import com.solvd.carservice.vehicle.Car;
+package com.solvd.carservice.domain.client;
+import com.solvd.carservice.domain.price.DiscountProgram;
+import com.solvd.carservice.domain.vehicle.Car;
 
 import java.time.LocalDate;
 import java.util.List;

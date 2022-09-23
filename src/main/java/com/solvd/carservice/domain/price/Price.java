@@ -1,6 +1,6 @@
-package com.solvd.carservice.price;
+package com.solvd.carservice.domain.price;
 
-import com.solvd.carservice.service.Service;
+import com.solvd.carservice.domain.service.Service;
 
 import java.util.List;
 

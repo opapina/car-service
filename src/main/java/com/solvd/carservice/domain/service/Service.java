@@ -1,7 +1,7 @@
-package com.solvd.carservice.service;
+package com.solvd.carservice.domain.service;
 
-import com.solvd.carservice.equipment.Material;
-import com.solvd.carservice.price.Price;
+import com.solvd.carservice.domain.equipment.Material;
+import com.solvd.carservice.domain.price.Price;
 
 import java.math.BigDecimal;
 import java.util.List;

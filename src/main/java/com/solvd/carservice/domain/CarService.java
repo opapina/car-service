@@ -1,7 +1,7 @@
-package com.solvd.carservice;
+package com.solvd.carservice.domain;
 
-import com.solvd.carservice.client.Client;
-import com.solvd.carservice.department.Department;
+import com.solvd.carservice.domain.client.Client;
+import com.solvd.carservice.domain.department.Department;
 
 import java.util.List;
 
@@ -28,12 +28,12 @@ public class CarService {
         this.name = name;
     }
 
-    public List<Department> getDepartment() {
+    public List<Department> getDepartments() {
         return departments;
     }
 
-    public void setDepartment(List<Department> department) {
-        this.departments = department;
+    public void setDepartments(List<Department> department) {
+        this.departments = departments;
     }
 
     public List<Client> getClients() {

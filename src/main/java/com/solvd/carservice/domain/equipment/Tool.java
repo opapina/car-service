@@ -1,10 +1,10 @@
-package com.solvd.carservice.price;
+package com.solvd.carservice.domain.equipment;
 
-public class DiscountProgram {
+public class Tool {
 
     private Long id;
     private String name;
-    private Double discount;
+    private Integer quantity;
 
     public Long getId() {
         return id;
@@ -22,11 +22,11 @@ public class DiscountProgram {
         this.name = name;
     }
 
-    public Double getDiscount() {
-        return discount;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setDiscount(Double discount) {
-        this.discount = discount;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
