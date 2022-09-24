@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import static com.solvd.carservice.persistence.Config.getData;
+
 public class ConnectionPool {
 
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
@@ -19,12 +21,14 @@ public class ConnectionPool {
     private ConnectionPool(Integer maxConnection) {
         connections = new ArrayBlockingQueue<>(maxConnection);
         for (int i = 0; i < maxConnection; i++) {
+            Config config = new Config();
             Connection connection;
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/car_services_db", "root", "Mysql123!");
+                Class.forName(getData("driver"));
+                connection = DriverManager.getConnection(getData("url"), getData("username"), getData("password"));
                 connections.put(connection);
-            } catch (SQLException | InterruptedException e) {
-                LOGGER.error(e);
+            } catch (ClassNotFoundException|SQLException|InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }

@@ -46,6 +46,6 @@ public class CarServiceServiceImpl implements CarServiceService {
 
     @Override
     public List<CarService> retrieveAll() {
-        return carServiceRepository.findAll();
+        return carServiceRepository.findAllLeft();
     }
 }

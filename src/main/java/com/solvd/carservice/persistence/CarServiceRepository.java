@@ -9,7 +9,12 @@ public interface CarServiceRepository {
 
     void create(CarService carService);
 
-    default List<CarService> findAll() {
+    default List<CarService> findAllLeft() {
+        List<CarService> carServices = new ArrayList<>();
+        return carServices;
+    }
+
+    default List<CarService> findAllRight() {
         List<CarService> carServices = new ArrayList<>();
         return carServices;
     }
