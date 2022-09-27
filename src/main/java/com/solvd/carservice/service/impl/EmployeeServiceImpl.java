@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee create(Employee employee, Long departmentId) {
         employee.setId(null);
-        employeeRepository.create(employee);
+        employeeRepository.create(employee, departmentId);
 
         if (employee.getChildren() != null) {
             List<Child> children = employee.getChildren().stream()
@@ -32,5 +32,22 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setChildren(children);
         }
         return employee;
+    }
+
+    @Override
+    public Employee update(Employee employee, String firstName, String lastName) {
+        employeeRepository.update(employee.getId(), firstName, lastName);
+        return employee;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        employeeRepository.delete(id);
+
+    }
+
+    @Override
+    public List<Employee> selectByProfession(String name) {
+        return employeeRepository.findByProfession(name);
     }
 }

@@ -18,7 +18,7 @@ public class CarServiceServiceImpl implements CarServiceService {
     private final DepartmentService departmentService;
     private final ClientService clientService;
 
-    public CarServiceServiceImpl(ClientService clientService) {
+    public CarServiceServiceImpl() {
         this.carServiceRepository = new CarServiceRepositoryImpl();
         this.departmentService = new DepartmentServiceImpl();
         this.clientService = new ClientServiceImpl();
@@ -36,12 +36,26 @@ public class CarServiceServiceImpl implements CarServiceService {
             carService.setDepartments(departments);
         }
         if (carService.getClients() != null) {
-            List<Client> clients = carService.getClients().stream()
-                    .map(client -> clientService.create(client, carService.getId()))
-                    .collect(Collectors.toList());
+            List<Client> clients = carService.getClients().stream().map(client -> clientService.create(client, carService.getId())).collect(Collectors.toList());
             carService.setClients(clients);
         }
         return carService;
+    }
+
+    @Override
+    public CarService update(CarService carService, String name) {
+        carServiceRepository.update(name, carService.getId());
+        return carService;
+    }
+
+    @Override
+    public List<CarService> selectByName(String name) {
+        return carServiceRepository.findByName(name);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        carServiceRepository.delete(id);
     }
 
     @Override

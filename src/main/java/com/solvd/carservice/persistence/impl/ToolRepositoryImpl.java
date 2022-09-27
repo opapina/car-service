@@ -5,7 +5,7 @@ import com.solvd.carservice.persistence.ToolRepository;
 
 public class ToolRepositoryImpl implements ToolRepository {
     @Override
-    public void create(Tool tool) {
+    public void create(Tool tool, Long id) {
 
     }
 }

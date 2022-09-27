@@ -32,7 +32,7 @@ public class CarService {
         return departments;
     }
 
-    public void setDepartments(List<Department> department) {
+    public void setDepartments(List<Department> departments) {
         this.departments = departments;
     }
 

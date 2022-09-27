@@ -25,7 +25,7 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
             statement.setString(1, carService.getName());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 carService.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
@@ -36,18 +36,33 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
     }
 
     @Override
-    public List<CarService> findAllLeft() {
-        List<CarService> carServices;
+    public void update(String name, Long id) {
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("select c.id as car_service_id, c.name as car_service_name, d.name as department_name, e.last_name as parents_surname \n" +
-                    "from car_services c left join departments d on c.id = d.car_service_id left join employees e on  d.id = e.department_id;");
+            PreparedStatement statement = connection.prepareStatement("update car_services set name = ? where id = ?");
+            statement.setString(1, name);
+            statement.setLong(2, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Unable to update this car service: ", e);
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public List<CarService> findByName(String name) {
+        List<CarService> carServices;
+        String query = "%" + name + "%";
+        Connection connection = connectionPool.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select c.id as car_service_id, c.name as car_service_name from car_services c where c.name like ?");
+            statement.setString(1, query);
             ResultSet resultSet = statement.executeQuery();
             carServices = mapCarServices(resultSet);
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Long id = resultSet.getLong("car_service_id");
                 String serviceName = resultSet.getString("car_service_name");
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -58,52 +73,62 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
     }
 
     @Override
-    public List<CarService> findAllRight() {
-        List<CarService> carServices;
+    public void delete(Long id) {
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("select id,name from car_services where id = ?");
-            statement.setLong(1, 17);
-            ResultSet resultSet = statement.executeQuery();
-            carServices = mapCarServices(resultSet);
-            while (resultSet.next()) {
-                Long id = resultSet.getLong(1);
-                String serviceName = resultSet.getString(2);
-                System.out.println(id + " " + serviceName);
-            }
+            PreparedStatement statement = connection.prepareStatement("delete from car_services where id = ?");
+            statement.setLong(1, id);
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
+    }
+
+    @Override
+    public List<CarService> findAllLeft() {
+        List<CarService> carServices = null;
+//        Connection connection = connectionPool.getConnection();
+//        try {
+//            PreparedStatement statement = connection.prepareStatement("select c.id as car_service_id, c.name as car_service_name, d.name as department_name, e.last_name as parents_surname \n" +
+//                    "from car_services c left join departments d on c.id = d.car_service_id left join employees e on  d.id = e.department_id;");
+//            ResultSet resultSet = statement.executeQuery();
+//            carServices = mapCarServices(resultSet);
+//            while(resultSet.next()) {
+//                Long id = resultSet.getLong("car_service_id");
+//                String serviceName = resultSet.getString("car_service_name");
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        } finally {
+//            connectionPool.releaseConnection(connection);
+//        }
         return carServices;
     }
 
     public static List<CarService> mapCarServices(ResultSet resultSet) throws SQLException {
         List<CarService> carServices = new ArrayList<>();
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             Long id = resultSet.getLong("car_service_id");
             CarService carService = findById(id, carServices);
             carService.setName(resultSet.getString("car_service_name"));
 
             List<Department> departments = DepartmentRepositoryImpl.mapDepartment(resultSet, carService.getDepartments());
             carService.setDepartments(departments);
-
-            List<Client> clients = ClientRepositoryImpl.mapClient(resultSet, carService.getClients());
-            carService.setClients(clients);
+//
+//            List<Client> clients = ClientRepositoryImpl.mapClient(resultSet, carService.getClients());
+//            carService.setClients(clients);
         }
         return carServices;
     }
 
-    private static CarService findById (Long id, List<CarService> carServices) {
-        return carServices.stream()
-                .filter(carService -> carService.getId().equals(id))
-                .findFirst()
-                .orElseGet(() -> {
-                    CarService createdCarService = new CarService();
-                    createdCarService.setId(id);
-                    carServices.add(createdCarService);
-                    return createdCarService;
-                });
+    private static CarService findById(Long id, List<CarService> carServices) {
+        return carServices.stream().filter(carService -> carService.getId().equals(id)).findFirst().orElseGet(() -> {
+            CarService createdCarService = new CarService();
+            createdCarService.setId(id);
+            carServices.add(createdCarService);
+            return createdCarService;
+        });
     }
 }

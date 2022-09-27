@@ -9,14 +9,17 @@ public interface CarServiceRepository {
 
     void create(CarService carService);
 
+    void update(String name, Long id);
+
+    default List<CarService> findByName (String name) {
+        List<CarService> carServices = new ArrayList<>();
+        return carServices;
+    }
+
+    void delete(Long id);
+
     default List<CarService> findAllLeft() {
         List<CarService> carServices = new ArrayList<>();
         return carServices;
     }
-
-    default List<CarService> findAllRight() {
-        List<CarService> carServices = new ArrayList<>();
-        return carServices;
-    }
-
 }

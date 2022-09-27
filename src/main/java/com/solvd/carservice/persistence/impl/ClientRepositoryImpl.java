@@ -60,7 +60,7 @@ public class ClientRepositoryImpl implements ClientRepository {
             client.setLastName(resultSet.getString("last_name"));
             client.setDob(resultSet.getTimestamp("client_dob").toLocalDateTime().toLocalDate());
             client.setRegistrationDate(resultSet.getTimestamp("registration_date").toLocalDateTime().toLocalDate());
-            client.setDiscountProgram(DiscountProgramRepositoryImpl.mapDiscountProgram(resultSet));
+//            client.setDiscountProgram(DiscountProgramRepositoryImpl.mapDiscountProgram(resultSet));
 
             List<Car> cars = CarRepositoryImpl.mapCar(resultSet, client.getCars());
             client.setCars(cars);

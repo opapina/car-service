@@ -42,7 +42,27 @@ public class DepartmentServiceImpl implements DepartmentService {
                     .collect(Collectors.toList());
             department.setTools(tools);
         }
-
         return department;
+    }
+
+    @Override
+    public Department update(Department department, String name) {
+        departmentRepository.update(department.getId(),name);
+        return department;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        departmentRepository.delete(id);
+    }
+
+    @Override
+    public List<Department> selectByCarServiceId(Long id) {
+        return departmentRepository.findById(id);
+    }
+
+    @Override
+    public List<Department> selectByName(String name) {
+        return departmentRepository.findByName(name);
     }
 }
