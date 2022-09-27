@@ -1,5 +1,6 @@
 package com.solvd.carservice.persistence.impl;
 
+import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.persistence.ConnectionPool;
 import com.solvd.carservice.persistence.EmployeeRepository;
@@ -19,8 +20,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public void create(Employee employee, Long departmentId) {
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into employees(department_id,first_name,last_name,dob,experience,profession) values" +
-                    " (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into employees(department_id,first_name,last_name,dob,experience,profession) values" + " (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, departmentId);
             preparedStatement.setString(2, employee.getFirstName());
             preparedStatement.setString(3, employee.getLastName());
@@ -37,7 +37,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         } finally {
             connectionPool.releaseConnection(connection);
         }
-
     }
 
     @Override
@@ -75,14 +74,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         List<Employee> employees;
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("select e.id as employee_id, e.first_name as name, e.last_name as surname, " +
-                            "e.dob as birth_day, e.experience as experience, e.profession as profession from employees e where e.profession = ?");
+            PreparedStatement statement = connection.prepareStatement("select e.id as employee_id, e.first_name as name, e.last_name as surname, " + "e.dob as birth_day, e.experience as experience, e.profession as profession from employees e where e.profession = ?");
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             employees = mapEmployees(resultSet);
             while (resultSet.next()) {
                 Long id = resultSet.getLong("employee_id");
-                String serviceName = resultSet.getString("department_name");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -92,7 +89,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return employees;
     }
 
-    public static List<Employee> mapEmployees (ResultSet resultSet) throws SQLException {
+    public static List<Employee> mapEmployees(ResultSet resultSet) throws SQLException {
         List<Employee> employees = new ArrayList<>();
         while (resultSet.next()) {
             employees = mapEmployee(resultSet, employees);
@@ -111,8 +108,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             employee.setFirstName(resultSet.getString("first_name"));
             employee.setLastName(resultSet.getString("last_name"));
 
-//            List<Child> children = ChildRepositoryImpl.mapChild(resultSet, employee.getChildren());
-//            employee.setChildren(children);
+            List<Child> children = ChildRepositoryImpl.mapChild(resultSet, employee.getChildren());
+            employee.setChildren(children);
         }
         return employees;
     }

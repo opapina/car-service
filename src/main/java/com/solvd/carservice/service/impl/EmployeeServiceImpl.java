@@ -26,9 +26,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.create(employee, departmentId);
 
         if (employee.getChildren() != null) {
-            List<Child> children = employee.getChildren().stream()
-                    .map(child -> childService.create(child, employee.getId()))
-                    .collect(Collectors.toList());
+            List<Child> children = employee.getChildren();
+            children.forEach(child -> childService.create(child));
             employee.setChildren(children);
         }
         return employee;
@@ -43,7 +42,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteById(Long id) {
         employeeRepository.delete(id);
-
     }
 
     @Override

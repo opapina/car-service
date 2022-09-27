@@ -1,7 +1,6 @@
 package com.solvd.carservice.persistence.impl;
 
 import com.solvd.carservice.domain.CarService;
-import com.solvd.carservice.domain.client.Client;
 import com.solvd.carservice.domain.department.Department;
 import com.solvd.carservice.persistence.CarServiceRepository;
 import com.solvd.carservice.persistence.ConnectionPool;

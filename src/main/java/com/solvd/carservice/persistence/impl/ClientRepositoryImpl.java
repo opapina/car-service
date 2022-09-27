@@ -20,7 +20,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     public void create(Client client, Long carServiceId) {
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into clients(car_service_id,first_name,last_name,dob,registration_date) values (?,?,?,?,?), (?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into clients(car_service_id,first_name,last_name,dob,registration_date) values (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, carServiceId);
             preparedStatement.setString(2, client.getFirstName());
             preparedStatement.setString(3, client.getLastName());
@@ -61,9 +61,8 @@ public class ClientRepositoryImpl implements ClientRepository {
             client.setDob(resultSet.getTimestamp("client_dob").toLocalDateTime().toLocalDate());
             client.setRegistrationDate(resultSet.getTimestamp("registration_date").toLocalDateTime().toLocalDate());
 //            client.setDiscountProgram(DiscountProgramRepositoryImpl.mapDiscountProgram(resultSet));
-
-            List<Car> cars = CarRepositoryImpl.mapCar(resultSet, client.getCars());
-            client.setCars(cars);
+//            List<Car> cars = CarRepositoryImpl.mapCar(resultSet, client.getCars());
+//            client.setCars(cars);
         }
         return clients;
     }

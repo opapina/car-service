@@ -128,11 +128,9 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 
             List<Employee> employees = EmployeeRepositoryImpl.mapEmployee(resultSet, department.getEmployees());
             department.setEmployees(employees);
-//
-//            List<Tool> tools = ToolRepositoryImpl.mapTool(resultSet, department.getTools());
-//            department.setTools(tools);
-//        }
 
+            List<Tool> tools = ToolRepositoryImpl.mapTool(resultSet, department.getTools());
+            department.setTools(tools);
         }
         return departments;
     }
