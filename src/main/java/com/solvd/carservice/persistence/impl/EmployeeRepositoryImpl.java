@@ -2,6 +2,7 @@ package com.solvd.carservice.persistence.impl;
 
 import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
+import com.solvd.carservice.domain.exception.RequestException;
 import com.solvd.carservice.persistence.ConnectionPool;
 import com.solvd.carservice.persistence.EmployeeRepository;
 
@@ -33,7 +34,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
                 employee.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to create employee: ", e);
+            throw new RequestException("Unable to create employee: ", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -49,7 +50,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             statement.setLong(3, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to update this department: ", e);
+            throw new RequestException("Unable to update this department: ", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -63,7 +64,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RequestException("Unable to delete employee");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -74,15 +75,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         List<Employee> employees;
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("select e.id as employee_id, e.first_name as name, e.last_name as surname, " + "e.dob as birth_day, e.experience as experience, e.profession as profession from employees e where e.profession = ?");
+            PreparedStatement statement = connection.prepareStatement("select e.id as employees_id, e.first_name as name, e.last_name as surname, " + "e.dob as birth_day, e.experience as experience, e.profession as profession from employees e where e.profession = ?");
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             employees = mapEmployees(resultSet);
             while (resultSet.next()) {
-                Long id = resultSet.getLong("employee_id");
+                Long id = resultSet.getLong("employees_id");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RequestException("Unable to find employees which have this profession");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -105,8 +106,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             }
 
             Employee employee = findById(id, employees);
-            employee.setFirstName(resultSet.getString("first_name"));
-            employee.setLastName(resultSet.getString("last_name"));
 
             List<Child> children = ChildRepositoryImpl.mapChild(resultSet, employee.getChildren());
             employee.setChildren(children);

@@ -5,14 +5,20 @@ import com.solvd.carservice.domain.client.Client;
 import com.solvd.carservice.domain.department.Department;
 import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
+import com.solvd.carservice.domain.employee.EmployeeChildren;
 import com.solvd.carservice.domain.equipment.Tool;
 import com.solvd.carservice.service.CarServiceService;
+import com.solvd.carservice.service.DepartmentService;
+import com.solvd.carservice.service.EmployeeChildrenService;
 import com.solvd.carservice.service.impl.CarServiceServiceImpl;
+import com.solvd.carservice.service.impl.DepartmentServiceImpl;
+import com.solvd.carservice.service.impl.EmployeeChildrenServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -59,7 +65,6 @@ public class Main {
         employee3.setDob(LocalDate.of(2001,7,14));
         employee3.setExperience(4);
         employee3.setProfession("designer");
-//        employee3.setChildren(Arrays.asList(child1,child2));
 
         Employee employee4 = new Employee();
         employee4.setFirstName("Misha");
@@ -130,46 +135,9 @@ public class Main {
         carService = carServiceService.create(carService);
         System.out.println(carService.getId() + " " + carService.getName());
 
-
-//        Department department = new Department();
-//        DepartmentService departmentService = new DepartmentServiceImpl();
-//        department = departmentService.create(department1, 1L);
-//        System.out.println(department.getId() + " " + department.getName());
-//        String newDepartmentName = "DepUpdate" + wordRandom();
-//        department = departmentService.update(department1, newDepartmentName);
-//        System.out.println(department.getId() + " " + department.getName());
-
-//        departmentService.deleteById(1);
-//        List<Department> depToUpdate = departmentService.selectByCarServiceId(1L);
-//        List<Department> depToUpdate1 = departmentService.selectByName("sus");
-//        System.out.println(department.getId());
-//        depToUpdate1.forEach(department3 -> {
-//            departmentService.deleteById(department3.getId());
-//        });
-//
-//        depToUpdate1.forEach(department3 -> {
-//            departmentService.deleteById(department3.getId());
-//        }
-//
-//        CarServiceService carServiceService2 = new CarServiceServiceImpl();
-//        carService2 = carServiceService2.create(carService2);
-//        System.out.println(carService2.getId() + " " + carService2.getName());
-//
-//
-//        List<CarService> carToUpdate = carServiceService1.selectByName("Car");
-//        System.out.println(carToUpdate.toString());
-//
-//        carToUpdate.forEach(carService -> {
-//            String newName = "Car" + wordRandom();
-//            carServiceService1.update(carService,newName);
-//            System.out.println(carService.getId() + " " + carService.getName());
-//        });
-//
-//        carToUpdate.forEach(carService -> {
-//            carServiceService2.deleteById(carService.getId());
-//            System.out.println(carService.getId() + " " + carService.getName());
-//        });
-
+        List<CarService> childCarServices = new ArrayList<>();
+        childCarServices = carServiceService.retrieveAll();
+        childCarServices.forEach(carService1 -> System.out.println(carService1.getId()));
     }
 
     private static String wordRandom() {

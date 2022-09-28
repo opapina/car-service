@@ -45,21 +45,23 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client update(Client client, String name) {
-        return null;
+        clientRepository.update(client.getId(),name);
+        return client;
     }
 
     @Override
     public void deleteById(Long id) {
+        clientRepository.delete(id);
 
     }
 
     @Override
     public List<Client> selectByCarServiceId(Long id) {
-        return null;
+        return clientRepository.findById(id);
     }
 
     @Override
     public List<Client> selectByLastName(String name) {
-        return null;
+        return clientRepository.findByName(name);
     }
 }
