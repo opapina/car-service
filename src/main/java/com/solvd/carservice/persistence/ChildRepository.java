@@ -17,4 +17,9 @@ public interface ChildRepository {
         List<Child> children = new ArrayList<>();
         return children;
     };
+
+    default List<Child> findAll() {
+        List<Child> children = new ArrayList<>();
+        return children;
+    };
 }

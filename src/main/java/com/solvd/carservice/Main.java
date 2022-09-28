@@ -5,14 +5,12 @@ import com.solvd.carservice.domain.client.Client;
 import com.solvd.carservice.domain.department.Department;
 import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
-import com.solvd.carservice.domain.employee.EmployeeChildren;
 import com.solvd.carservice.domain.equipment.Tool;
 import com.solvd.carservice.service.CarServiceService;
-import com.solvd.carservice.service.DepartmentService;
-import com.solvd.carservice.service.EmployeeChildrenService;
+import com.solvd.carservice.service.ChildService;
 import com.solvd.carservice.service.impl.CarServiceServiceImpl;
-import com.solvd.carservice.service.impl.DepartmentServiceImpl;
-import com.solvd.carservice.service.impl.EmployeeChildrenServiceImpl;
+import com.solvd.carservice.service.impl.ChildServiceImpl;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -133,11 +131,12 @@ public class Main {
 
         CarServiceService carServiceService = new CarServiceServiceImpl();
         carService = carServiceService.create(carService);
-        System.out.println(carService.getId() + " " + carService.getName());
+        LOGGER.info(carService.getId() + " " + carService.getName());
 
-        List<CarService> childCarServices = new ArrayList<>();
-        childCarServices = carServiceService.retrieveAll();
-        childCarServices.forEach(carService1 -> System.out.println(carService1.getId()));
+        ChildService childService = new ChildServiceImpl();
+        List<Child> children = new ArrayList<>();
+        children = childService.selectAll();
+        children.forEach(child -> LOGGER.info(child.getId() + " " + child.getFirstName() + " " + child.getLastName()));
     }
 
     private static String wordRandom() {

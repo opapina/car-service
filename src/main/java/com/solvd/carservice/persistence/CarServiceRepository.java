@@ -18,8 +18,4 @@ public interface CarServiceRepository {
 
     void delete(Long id);
 
-    default List<CarService> findAllLeft() {
-        List<CarService> carServices = new ArrayList<>();
-        return carServices;
-    }
 }

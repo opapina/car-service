@@ -14,4 +14,6 @@ public interface ChildService {
 
     List<Child> selectByName(String lastName);
 
+    List<Child> selectAll();
+
 }

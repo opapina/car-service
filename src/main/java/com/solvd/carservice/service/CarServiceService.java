@@ -14,6 +14,4 @@ public interface CarServiceService {
 
     List<CarService> selectByName(String name);
 
-    List<CarService> retrieveAll();
-
 }

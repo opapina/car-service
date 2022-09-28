@@ -1,6 +1,7 @@
 package com.solvd.carservice.persistence.impl;
 
 import com.solvd.carservice.domain.CarService;
+import com.solvd.carservice.domain.client.Client;
 import com.solvd.carservice.domain.department.Department;
 import com.solvd.carservice.domain.exception.RequestException;
 import com.solvd.carservice.persistence.CarServiceRepository;
@@ -86,25 +87,6 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
         }
     }
 
-    @Override
-    public List<CarService> findAllLeft() {
-        List<CarService> carServices = null;
-        Connection connection = connectionPool.getConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement("select c.id as car_service_id, c.name as car_service_name, d.id as department_id, " +
-                    "d.name as department_name, e.id as employee_id, e.last_name as parents_surname, ch.id as child_id, ch.first_name as child_name, ch.last_name as child_surname from car_services c " +
-                    "left join departments d on c.id = d.car_service_id left join employees e on d.id = e.department_id left join employee_children ec " +
-                    " on e.id = ec.employee_id left join children ch on ch.id = ec.child_id;");
-            ResultSet resultSet = statement.executeQuery();
-            carServices = mapCarServices(resultSet);
-        } catch (SQLException e) {
-            throw new RequestException("Unable to find children", e);
-        } finally {
-            connectionPool.releaseConnection(connection);
-        }
-        return carServices;
-    }
-
     public static List<CarService> mapCarServices(ResultSet resultSet) throws SQLException {
         List<CarService> carServices = new ArrayList<>();
         while (resultSet.next()) {
@@ -115,8 +97,8 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
             List<Department> departments = DepartmentRepositoryImpl.mapDepartment(resultSet, carService.getDepartments());
             carService.setDepartments(departments);
 
-//            List<Client> clients = ClientRepositoryImpl.mapClient(resultSet, carService.getClients());
-//            carService.setClients(clients);
+            List<Client> clients = ClientRepositoryImpl.mapClient(resultSet, carService.getClients());
+            carService.setClients(clients);
         }
         return carServices;
     }
