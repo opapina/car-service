@@ -1,7 +1,6 @@
 package com.solvd.carservice.persistence.impl;
 
 import com.solvd.carservice.domain.client.Client;
-import com.solvd.carservice.domain.department.Department;
 import com.solvd.carservice.domain.exception.RequestException;
 import com.solvd.carservice.persistence.ClientRepository;
 import com.solvd.carservice.persistence.ConnectionPool;
@@ -124,21 +123,21 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     public static List<Client> mapClient(ResultSet resultSet, List<Client> clients) throws SQLException {
-        long id = resultSet.getLong("client_id");
-        if (id != 0) {
-            if (clients == null) {
-                clients = new ArrayList<>();
-            }
-
-            Client client = findById(id, clients);
-            client.setFirstName(resultSet.getString("first_name"));
-            client.setLastName(resultSet.getString("last_name"));
-            client.setDob(resultSet.getTimestamp("client_dob").toLocalDateTime().toLocalDate());
-            client.setRegistrationDate(resultSet.getTimestamp("registration_date").toLocalDateTime().toLocalDate());
+//        long id = resultSet.getLong("client_id");
+//        if (id != 0) {
+//            if (clients == null) {
+//                clients = new ArrayList<>();
+//            }
+//
+//            Client client = findById(id, clients);
+//            client.setFirstName(resultSet.getString("first_name"));
+//            client.setLastName(resultSet.getString("last_name"));
+//            client.setDob(resultSet.getTimestamp("client_dob").toLocalDateTime().toLocalDate());
+//            client.setRegistrationDate(resultSet.getTimestamp("registration_date").toLocalDateTime().toLocalDate());
 //            client.setDiscountProgram(DiscountProgramRepositoryImpl.mapDiscountProgram(resultSet));
 //            List<Car> cars = CarRepositoryImpl.mapCar(resultSet, client.getCars());
 //            client.setCars(cars);
-        }
+//        }
         return clients;
     }
 

@@ -39,10 +39,4 @@ public class ChildServiceImpl implements ChildService {
         return childRepository.findByName(lastName);
     }
 
-    @Override
-    public List<Child> selectAll() {
-        return childRepository.findAll();
-    }
-
-
 }

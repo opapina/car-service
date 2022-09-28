@@ -1,6 +1,5 @@
 package com.solvd.carservice.persistence.impl;
 
-import com.solvd.carservice.domain.CarService;
 import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.exception.RequestException;
 import com.solvd.carservice.persistence.ChildRepository;
@@ -81,25 +80,6 @@ public class ChildRepositoryImpl implements ChildRepository {
             }
         } catch (SQLException e) {
             throw new RequestException("Cannot find children with that name", e);
-        } finally {
-            connectionPool.releaseConnection(connection);
-        }
-        return children;
-    }
-
-    @Override
-    public List<Child> findAll() {
-        List<Child> children = null;
-        Connection connection = connectionPool.getConnection();
-        try {
-            PreparedStatement statement = connection.prepareStatement("select ch.id as child_id, ch.first_name as child_name, ch.last_name as child_surname, " +
-                    "c.id as car_service_id, c.name as car_service_name, d.id as department_id, d.name as department_name, e.id as employee_id, e.last_name as parents_surname " +
-                    "from children ch left join employee_children ec on ch.id = ec.child_id left join employees e on e.id = ec.employee_id  left join departments d " +
-                    "on d.id = e.department_id left join  car_services c on c.id = d.car_service_id;");
-            ResultSet resultSet = statement.executeQuery();
-            children = mapChildren(resultSet);
-        } catch (SQLException e) {
-            throw new RequestException("Unable to find children", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
