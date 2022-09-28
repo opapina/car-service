@@ -13,14 +13,8 @@ public interface ClientRepository {
 
     void delete(Long id);
 
-    default List<Client> findById(Long id) {
-        List<Client> clients= new ArrayList<>();
-        return clients;
-    }
+    List<Client> findById(Long id);
 
-    default List<Client> findByName(String name) {
-        List<Client> clients= new ArrayList<>();
-        return clients;
-    }
+    List<Client> findByName(String name);
 
 }

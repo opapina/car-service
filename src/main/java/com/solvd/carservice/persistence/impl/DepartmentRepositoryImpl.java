@@ -137,11 +137,14 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
     }
 
     private static Department findByDepId(Long id, List<Department> departments) {
-        return departments.stream().filter(department -> department.getId().equals(id)).findFirst().orElseGet(() -> {
-            Department createdDepartment = new Department();
-            createdDepartment.setId(id);
-            departments.add(createdDepartment);
-            return createdDepartment;
-        });
+        return departments.stream()
+                .filter(department -> department.getId().equals(id))
+                .findFirst()
+                .orElseGet(() -> {
+                    Department createdDepartment = new Department();
+                    createdDepartment.setId(id);
+                    departments.add(createdDepartment);
+                    return createdDepartment;
+                });
     }
 }

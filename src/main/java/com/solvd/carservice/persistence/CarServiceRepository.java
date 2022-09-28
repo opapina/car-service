@@ -2,7 +2,6 @@ package com.solvd.carservice.persistence;
 
 import com.solvd.carservice.domain.CarService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface CarServiceRepository {
@@ -11,15 +10,10 @@ public interface CarServiceRepository {
 
     void update(String name, Long id);
 
-    default List<CarService> findByName(String name) {
-        List<CarService> carServices = new ArrayList<>();
-        return carServices;
-    }
+    List<CarService> findByName(String name);
 
     void delete(Long id);
 
-    default List<CarService> findAllLeft() {
-        List<CarService> carServices = new ArrayList<>();
-        return carServices;
-    }
+   List<CarService> findAllLeft();
+
 }

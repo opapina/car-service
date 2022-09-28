@@ -106,6 +106,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             }
 
             Employee employee = findById(id, employees);
+            employee.setFirstName(resultSet.getString("parent_name"));
+            employee.setLastName(resultSet.getString("parent_surname"));
 
             List<Child> children = ChildRepositoryImpl.mapChild(resultSet, employee.getChildren());
             employee.setChildren(children);
@@ -114,11 +116,14 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     private static Employee findById(Long id, List<Employee> employees) {
-        return employees.stream().filter(employee -> employee.getId().equals(id)).findFirst().orElseGet(() -> {
-            Employee createdEmployee = new Employee();
-            createdEmployee.setId(id);
-            employees.add(createdEmployee);
-            return createdEmployee;
-        });
+        return employees.stream()
+                .filter(employee -> employee.getId().equals(id))
+                .findFirst()
+                .orElseGet(() -> {
+                    Employee createdEmployee = new Employee();
+                    createdEmployee.setId(id);
+                    employees.add(createdEmployee);
+                    return createdEmployee;
+                });
     }
 }

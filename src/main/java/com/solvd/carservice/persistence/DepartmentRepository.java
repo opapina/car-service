@@ -13,13 +13,8 @@ public interface DepartmentRepository {
 
     void delete(Long id);
 
-    default List<Department> findByName(String name) {
-        List<Department> departments = new ArrayList<>();
-        return departments;
-    }
+    List<Department> findByName(String name);
 
-    default List<Department> findById(Long id) {
-        List<Department> departments = new ArrayList<>();
-        return departments;
-    }
+    List<Department> findById(Long id);
+
 }

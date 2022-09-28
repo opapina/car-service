@@ -13,8 +13,6 @@ public interface ToolRepository {
 
     void delete(Long id);
 
-    default List<Tool> findByName(String name) {
-        List<Tool> tools = new ArrayList<>();
-        return tools;
-    };
+    List<Tool> findByName(String name);
+
 }

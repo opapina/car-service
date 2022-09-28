@@ -13,9 +13,6 @@ public interface ChildRepository {
 
     void delete(Long id);
 
-    default List<Child> findByName(String name) {
-        List<Child> children = new ArrayList<>();
-        return children;
-    };
+    List<Child> findByName(String name);
 
 }

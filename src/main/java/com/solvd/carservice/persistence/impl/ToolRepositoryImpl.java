@@ -109,11 +109,13 @@ public class ToolRepositoryImpl implements ToolRepository {
     }
 
     private static Tool findById(Long id, List<Tool> tools) {
-        return tools.stream().filter(tool -> tool.getId().equals(id)).findFirst().orElseGet(() -> {
-            Tool createdTool = new Tool();
-            createdTool.setId(id);
-            tools.add(createdTool);
-            return createdTool;
-        });
+        return tools.stream().filter(tool -> tool.getId().equals(id))
+                .findFirst()
+                .orElseGet(() -> {
+                    Tool createdTool = new Tool();
+                    createdTool.setId(id);
+                    tools.add(createdTool);
+                    return createdTool;
+                });
     }
 }

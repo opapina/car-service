@@ -109,11 +109,14 @@ public class ChildRepositoryImpl implements ChildRepository {
     }
 
     private static Child findById(Long id, List<Child> children) {
-        return children.stream().filter(tool -> tool.getId().equals(id)).findFirst().orElseGet(() -> {
-            Child createdChild = new Child();
-            createdChild.setId(id);
-            children.add(createdChild);
-            return createdChild;
-        });
+        return children.stream().
+                filter(tool -> tool.getId().equals(id))
+                .findFirst()
+                .orElseGet(() -> {
+                    Child createdChild = new Child();
+                    createdChild.setId(id);
+                    children.add(createdChild);
+                    return createdChild;
+                });
     }
 }

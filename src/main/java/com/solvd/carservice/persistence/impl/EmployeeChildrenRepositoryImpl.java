@@ -92,11 +92,14 @@ public class EmployeeChildrenRepositoryImpl implements EmployeeChildrenRepositor
     }
 
     private static EmployeeChildren findById(Long id, List<EmployeeChildren> employeeChildren) {
-        return employeeChildren.stream().filter(tool -> tool.getId().equals(id)).findFirst().orElseGet(() -> {
-            EmployeeChildren createdEmployeeChild = new EmployeeChildren();
-            createdEmployeeChild.setId(id);
-            employeeChildren.add(createdEmployeeChild);
-            return  createdEmployeeChild;
-        });
+        return employeeChildren.stream()
+                .filter(tool -> tool.getId().equals(id))
+                .findFirst()
+                .orElseGet(() -> {
+                    EmployeeChildren createdEmployeeChild = new EmployeeChildren();
+                    createdEmployeeChild.setId(id);
+                    employeeChildren.add(createdEmployeeChild);
+                    return  createdEmployeeChild;
+                });
     }
 }
