@@ -1,6 +1,7 @@
 package com.solvd.carservice.persistence.impl;
 
 import com.solvd.carservice.domain.equipment.Tool;
+import com.solvd.carservice.domain.exception.RequestException;
 import com.solvd.carservice.persistence.ConnectionPool;
 import com.solvd.carservice.persistence.ToolRepository;
 
@@ -29,7 +30,7 @@ public class ToolRepositoryImpl implements ToolRepository {
                 tool.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to create tool: ", e);
+            throw new RequestException("Unable to create tool: ", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -44,7 +45,7 @@ public class ToolRepositoryImpl implements ToolRepository {
             statement.setLong(2, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to update this department: ", e);
+            throw new RequestException("Unable to update this department: ", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -58,7 +59,7 @@ public class ToolRepositoryImpl implements ToolRepository {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RequestException("Unable to delete this tool");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -78,7 +79,7 @@ public class ToolRepositoryImpl implements ToolRepository {
                 Long id = resultSet.getLong("tool_id");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RequestException("Cannot find tools with that name");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -94,16 +95,16 @@ public class ToolRepositoryImpl implements ToolRepository {
     }
 
     public static List<Tool> mapTool(ResultSet resultSet, List<Tool> tools) throws SQLException {
-        long id = resultSet.getLong("tool_id");
-        if (id != 0) {
-            if (tools == null) {
-                tools = new ArrayList<>();
-            }
-
-            Tool tool = findById(id, tools);
-            tool.setName(resultSet.getString("tool_name"));
-            tool.setQuantity(resultSet.getInt("quantity"));
-        }
+//        long id = resultSet.getLong("tool_id");
+//        if (id != 0) {
+//            if (tools == null) {
+//                tools = new ArrayList<>();
+//            }
+//
+//            Tool tool = findById(id, tools);
+//            tool.setName(resultSet.getString("tool_name"));
+//            tool.setQuantity(resultSet.getInt("quantity"));
+//        }
         return tools;
     }
 

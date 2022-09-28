@@ -1,6 +1,7 @@
 package com.solvd.carservice.persistence.impl;
 
 import com.solvd.carservice.domain.employee.Child;
+import com.solvd.carservice.domain.exception.RequestException;
 import com.solvd.carservice.persistence.ChildRepository;
 import com.solvd.carservice.persistence.ConnectionPool;
 
@@ -29,7 +30,7 @@ public class ChildRepositoryImpl implements ChildRepository {
                 child.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to create child: ", e);
+            throw new RequestException("Unable to create child: ", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -44,7 +45,7 @@ public class ChildRepositoryImpl implements ChildRepository {
             statement.setLong(2, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to update this child: ", e);
+            throw new RequestException("Unable to update this child: ", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -59,7 +60,7 @@ public class ChildRepositoryImpl implements ChildRepository {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RequestException("Unable to delete child");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -78,7 +79,7 @@ public class ChildRepositoryImpl implements ChildRepository {
                 Long id = resultSet.getLong("child_id");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RequestException("Cannot find children with that name", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }

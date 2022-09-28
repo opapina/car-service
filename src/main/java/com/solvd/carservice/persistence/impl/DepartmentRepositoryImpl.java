@@ -3,6 +3,7 @@ package com.solvd.carservice.persistence.impl;
 import com.solvd.carservice.domain.department.Department;
 import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.domain.equipment.Tool;
+import com.solvd.carservice.domain.exception.RequestException;
 import com.solvd.carservice.persistence.ConnectionPool;
 import com.solvd.carservice.persistence.DepartmentRepository;
 
@@ -45,7 +46,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
             statement.setLong(2, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to update this department: ", e);
+            throw new RuntimeException("Unable to update this department, because FOREIGN_KEY_CHECKS = 1 ", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -59,7 +60,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RequestException("Cannot to delete department, because FOREIGN_KEY_CHECKS = 1");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -77,10 +78,10 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
             departments = mapDepartments(resultSet);
             while (resultSet.next()) {
                 Long id = resultSet.getLong("department_id");
-                String serviceName = resultSet.getString("department_name");
+                String departmentName = resultSet.getString("department_name");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RequestException("Cannot find departments with this name");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -100,7 +101,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
                 String serviceName = resultSet.getString("department_name");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RequestException("Cannot find department for this car service");
         } finally {
             connectionPool.releaseConnection(connection);
         }

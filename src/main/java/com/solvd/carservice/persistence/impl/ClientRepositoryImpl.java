@@ -1,7 +1,8 @@
 package com.solvd.carservice.persistence.impl;
 
 import com.solvd.carservice.domain.client.Client;
-import com.solvd.carservice.domain.vehicle.Car;
+import com.solvd.carservice.domain.department.Department;
+import com.solvd.carservice.domain.exception.RequestException;
 import com.solvd.carservice.persistence.ClientRepository;
 import com.solvd.carservice.persistence.ConnectionPool;
 
@@ -33,10 +34,84 @@ public class ClientRepositoryImpl implements ClientRepository {
                 client.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to create client: ", e);
+            throw new RequestException("Unable to create client: ", e);
         } finally {
             connectionPool.releaseConnection(connection);
         }
+    }
+
+    @Override
+    public void update(Long id, String name) {
+        Connection connection = connectionPool.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("update clients set first_name = ? where id = ?");
+            statement.setString(1, name);
+            statement.setLong(2, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Unable to update this department, because FOREIGN_KEY_CHECKS = 1 ", e);
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public void delete(Long id) {
+        Connection connection = connectionPool.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("delete from clients where id = ?");
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RequestException("Cannot delete client, because FOREIGN_KEY_CHECKS = 1");
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public List<Client> findById(Long carServiceId) {
+        List<Client> clients;
+        Connection connection = connectionPool.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select c.id as client_id, c.first_name as name, c.last_name as surname, " +
+                    "c.dob as birth_day from clients c where d.car_service_id = ?");
+            statement.setLong(1, carServiceId);
+            ResultSet resultSet = statement.executeQuery();
+            clients = mapClients(resultSet);
+            while (resultSet.next()) {
+                Long id = resultSet.getLong("department_id");
+                String serviceName = resultSet.getString("department_name");
+            }
+        } catch (SQLException e) {
+            throw new RequestException("Cannot find client for this car service");
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return  clients;
+    }
+
+    @Override
+    public List<Client> findByName(String name) {
+        List<Client> clients;
+        String query = "%" + name + "%";
+        Connection connection = connectionPool.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select c.id as client_id, c.first_name as name, c.last_name as surname, " +
+                            "c.dob as birth_day from clients c where c.last_name like ?");
+            statement.setString(1, query);
+            ResultSet resultSet = statement.executeQuery();
+            clients = mapClients(resultSet);
+            while (resultSet.next()) {
+                Long id = resultSet.getLong("client_id");
+                String surName = resultSet.getString("surname");
+            }
+        } catch (SQLException e) {
+            throw new RequestException("Cannot find client with this name");
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return clients;
     }
 
     private static List<Client> mapClients(ResultSet resultSet) throws SQLException {
