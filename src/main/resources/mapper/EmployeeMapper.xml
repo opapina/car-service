@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.carservice.persistence.EmployeeRepository">
+
+    <insert id="create" keyColumn="id" keyProperty="employee.id" useGeneratedKeys="true">
+        Insert into Employees(department_id,first_name,last_name,dob,experience,profession) values (#{departmentId},
+        #{employee.firstName},#{employee.lastName},#{employee.dob},#{employee.experience},#{employee.profession})
+    </insert>
+
+    <select id="findByProfession" resultMap="EmployeeResultMap">
+        select e.id as employees_id, e.first_name as name, e.last_name as surname,
+        e.dob as birth_day, e.experience as experience, e.profession as profession from Employees e where e.profession =
+        #{name}
+    </select>
+
+    <update id="update">
+        Update Employees set first_name = #{firstName}, last_name = #{lastName} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        Delete from Employees where id = #{id}
+    </delete>
+
+    <resultMap id="EmployeeResultMap" type="com.solvd.carservice.domain.employee.Employee" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="firstName" column="name"/>
+        <result property="lastName" column="surname"/>
+        <result property="dob" column="birth_day"/>
+        <result property="experience" column="experience"/>
+        <result property="profession" column="profession"/>
+    </resultMap>
+
+</mapper>

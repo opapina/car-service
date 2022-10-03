@@ -7,7 +7,9 @@ import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.domain.equipment.Tool;
 import com.solvd.carservice.service.CarServiceService;
+import com.solvd.carservice.service.DepartmentService;
 import com.solvd.carservice.service.impl.CarServiceServiceImpl;
+import com.solvd.carservice.service.impl.DepartmentServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -107,7 +109,8 @@ public class Main {
         Department department2 = new Department();
         department2.setName("Constructor Department");
         department2.setEmployees(Arrays.asList(employee4, employee5));
-        department2.setTools(Arrays.asList(tool4, tool5, tool6));
+      //department2.setTools(Arrays.asList(tool4, tool5, tool6));
+
 
         Client client1 = new Client();
         client1.setFirstName("Andrei");
@@ -122,19 +125,18 @@ public class Main {
         client2.setRegistrationDate(LocalDate.of(2022,6,10));
 
         CarService carService = new CarService();
-        carService.setName("Auto" + wordRandom());
+        carService.setName("Car" + wordRandom());
         carService.setDepartments(Arrays.asList(department1, department2));
-        carService.setClients(Arrays.asList(client1,client2));
-
+//        carService.setClients(Arrays.asList(client1,client2));
+//
         CarServiceService carServiceService = new CarServiceServiceImpl();
         carService = carServiceService.create(carService);
         LOGGER.info(carService.getId() + " " + carService.getName());
-        LOGGER.info("child for following car-service id were found");
 
+        LOGGER.info("child for following car-service id were found");
         List<CarService> childCarServices = new ArrayList<>();
         childCarServices = carServiceService.retrieveAll();
         childCarServices.forEach(carService1 -> LOGGER.info((carService1.getId())));
-
     }
 
     private static String wordRandom() {

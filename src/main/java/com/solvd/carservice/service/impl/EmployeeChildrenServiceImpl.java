@@ -2,6 +2,7 @@ package com.solvd.carservice.service.impl;
 
 import com.solvd.carservice.domain.employee.EmployeeChildren;
 import com.solvd.carservice.persistence.EmployeeChildrenRepository;
+import com.solvd.carservice.persistence.impl.EmployeeChildrenMapperImpl;
 import com.solvd.carservice.persistence.impl.EmployeeChildrenRepositoryImpl;
 import com.solvd.carservice.service.EmployeeChildrenService;
 
@@ -12,7 +13,9 @@ public class EmployeeChildrenServiceImpl implements EmployeeChildrenService {
     private EmployeeChildrenRepository employeeChildrenRepository;
 
     public EmployeeChildrenServiceImpl() {
-        this.employeeChildrenRepository = new EmployeeChildrenRepositoryImpl();
+
+//        this.employeeChildrenRepository = new EmployeeChildrenRepositoryImpl();
+        this.employeeChildrenRepository = new EmployeeChildrenMapperImpl();
     }
     @Override
     public EmployeeChildren create(Long employeeId, Long childrenId) {

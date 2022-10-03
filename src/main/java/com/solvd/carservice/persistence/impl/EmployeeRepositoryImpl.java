@@ -21,7 +21,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public void create(Employee employee, Long departmentId) {
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into employees(department_id,first_name,last_name,dob,experience,profession) values" + " (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into employees(department_id,first_name,last_name,dob,experience,profession) values" +
+                    " (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, departmentId);
             preparedStatement.setString(2, employee.getFirstName());
             preparedStatement.setString(3, employee.getLastName());
@@ -75,7 +76,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         List<Employee> employees;
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("select e.id as employees_id, e.first_name as name, e.last_name as surname, " + "e.dob as birth_day, e.experience as experience, e.profession as profession from employees e where e.profession = ?");
+            PreparedStatement statement = connection.prepareStatement("select e.id as employees_id, e.first_name as name, e.last_name as surname, " +
+                    "e.dob as birth_day, e.experience as experience, e.profession as profession from employees e where e.profession = ?");
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             employees = mapEmployees(resultSet);

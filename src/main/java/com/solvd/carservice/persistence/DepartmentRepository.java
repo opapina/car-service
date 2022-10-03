@@ -1,15 +1,15 @@
 package com.solvd.carservice.persistence;
 
 import com.solvd.carservice.domain.department.Department;
+import org.apache.ibatis.annotations.Param;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface DepartmentRepository {
 
-    void create(Department department, Long id);
+    void create(@Param("department") Department department, @Param("carServiceId") Long carServiceId);
 
-    void update(Long id, String name);
+    void update(@Param("id") Long id, @Param("name") String name);
 
     void delete(Long id);
 
