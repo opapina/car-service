@@ -19,6 +19,5 @@
         <mapper resource="mapper/ChildMapper.xml"/>
         <mapper resource="mapper/DepartmentMapper.xml"/>
         <mapper resource="mapper/EmployeeMapper.xml"/>
-        <mapper resource="mapper/EmployeeChildrenMapper.xml"/>
     </mappers>
 </configuration>

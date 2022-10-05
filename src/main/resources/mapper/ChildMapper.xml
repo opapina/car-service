@@ -3,7 +3,7 @@
 <mapper namespace="com.solvd.carservice.persistence.ChildRepository">
 
     <insert id="create" keyProperty="id" useGeneratedKeys="true">
-        Insert into Children(first_name,last_name,dob) values (#{firstName},#{lastName},#{dob})
+        Insert into Children (first_name, last_name, dob) values (#{firstName}, #{lastName}, #{dob})
     </insert>
 
     <select id="findByName" resultMap="ChildResultMap">
@@ -19,7 +19,7 @@
     </delete>
 
     <resultMap id="ChildResultMap" type="com.solvd.carservice.domain.employee.Child" autoMapping="false">
-        <id property="id" column="id"/>
+        <id property="id" column="child_id"/>
         <result property="firstName" column="child_name"/>
         <result property="lastName" column="child_surname"/>
     </resultMap>

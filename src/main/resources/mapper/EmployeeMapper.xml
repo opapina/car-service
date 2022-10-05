@@ -3,8 +3,13 @@
 <mapper namespace="com.solvd.carservice.persistence.EmployeeRepository">
 
     <insert id="create" keyColumn="id" keyProperty="employee.id" useGeneratedKeys="true">
-        Insert into Employees(department_id,first_name,last_name,dob,experience,profession) values (#{departmentId},
-        #{employee.firstName},#{employee.lastName},#{employee.dob},#{employee.experience},#{employee.profession})
+        Insert into Employees(department_id, first_name,last_name, dob, experience, profession) values (#{departmentId},
+        #{employee.firstName}, #{employee.lastName}, #{employee.dob}, #{employee.experience}, #{employee.profession})
+    </insert>
+
+    <insert id="createEmployeeChildren" useGeneratedKeys="true" keyColumn="id">
+        insert into employee_children (employee_id, child_id)
+        values (#{employee.id}, #{children.id})
     </insert>
 
     <select id="findByProfession" resultMap="EmployeeResultMap">
@@ -22,12 +27,14 @@
     </delete>
 
     <resultMap id="EmployeeResultMap" type="com.solvd.carservice.domain.employee.Employee" autoMapping="false">
-        <id property="id" column="id"/>
-        <result property="firstName" column="name"/>
-        <result property="lastName" column="surname"/>
+        <id property="id" column="employee_id"/>
+        <result property="firstName" column="employee_name"/>
+        <result property="lastName" column="employee_surname"/>
         <result property="dob" column="birth_day"/>
         <result property="experience" column="experience"/>
         <result property="profession" column="profession"/>
+        <collection property="children"
+                    resultMap="com.solvd.carservice.persistence.ChildRepository.ChildResultMap"/>
     </resultMap>
 
 </mapper>

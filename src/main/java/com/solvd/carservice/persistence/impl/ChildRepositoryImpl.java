@@ -71,7 +71,7 @@ public class ChildRepositoryImpl implements ChildRepository {
         List<Child> children;
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("select ch.firstName as child_name, ch.lastName as child_surname " +
+            PreparedStatement statement = connection.prepareStatement("select ch.first_name as child_name, ch.last_name as child_surname " +
                     "from children ch where ch.name = ?");
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();

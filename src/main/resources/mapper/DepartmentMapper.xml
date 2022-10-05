@@ -3,7 +3,7 @@
 <mapper namespace="com.solvd.carservice.persistence.DepartmentRepository">
 
     <insert id="create" keyColumn="id" keyProperty="department.id" useGeneratedKeys="true">
-        Insert into Departments (car_service_id, name) values (#{carServiceId},#{department.name})
+        Insert into Departments (car_service_id, name) values (#{carServiceId}, #{department.name})
     </insert>
 
     <select id="findByName" resultMap="DepartmentResultMap">
@@ -11,8 +11,7 @@
     </select>
 
     <select id="findById" resultMap="DepartmentResultMap">
-        select d.id as department_id, d.name as department_name from Departments d where d.car_service_id =
-        #{car_service_id}
+        select d.id as department_id, d.name as department_name from Departments d where d.car_service_id = #{car_service_id}
     </select>
 
     <update id="update">
@@ -26,7 +25,7 @@
     <resultMap id="DepartmentResultMap" type="com.solvd.carservice.domain.department.Department" autoMapping="false">
         <id property="id" column="department_id"/>
         <result property="name" column="name"/>
-        <!--        <collection property="employees" resultMap="com.solvd.carservice.persistence.EmployeeRepository.EmployeeResultMap"/>-->
+        <collection property="employees" resultMap="com.solvd.carservice.persistence.EmployeeRepository.EmployeeResultMap"/>
     </resultMap>
 
 </mapper>

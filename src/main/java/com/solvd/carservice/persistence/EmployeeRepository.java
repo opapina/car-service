@@ -1,5 +1,6 @@
 package com.solvd.carservice.persistence;
 
+import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,5 +15,7 @@ public interface EmployeeRepository {
     void delete(Long id);
 
     List<Employee> findByProfession(String name);
+
+    void createEmployeeChildren(@Param("employee") Employee employee, @Param("children")Child child);
 
 }

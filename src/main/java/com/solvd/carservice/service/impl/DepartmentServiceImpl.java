@@ -5,6 +5,7 @@ import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.domain.equipment.Tool;
 import com.solvd.carservice.persistence.DepartmentRepository;
 import com.solvd.carservice.persistence.impl.DepartmentMapperImpl;
+import com.solvd.carservice.persistence.impl.DepartmentRepositoryImpl;
 import com.solvd.carservice.service.DepartmentService;
 import com.solvd.carservice.service.EmployeeService;
 import com.solvd.carservice.service.ToolService;

@@ -1,5 +1,6 @@
 package com.solvd.carservice.persistence.impl;
 
+import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.persistence.EmployeeRepository;
 import com.solvd.carservice.persistence.MybatisConfig;
@@ -37,6 +38,14 @@ public class EmployeeMapperImpl implements EmployeeRepository {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
             EmployeeRepository employeeRepository = session.getMapper(EmployeeRepository.class);
             return employeeRepository.findByProfession(name);
+        }
+    }
+
+    @Override
+    public void createEmployeeChildren(Employee employee, Child child) {
+        try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
+            EmployeeRepository employeeRepository = session.getMapper(EmployeeRepository.class);
+            employeeRepository.createEmployeeChildren(employee, child);
         }
     }
 }

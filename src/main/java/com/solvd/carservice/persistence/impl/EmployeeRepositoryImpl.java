@@ -92,6 +92,25 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return employees;
     }
 
+    @Override
+    public void createEmployeeChildren(Employee employee, Child child) {
+        Connection connection = connectionPool.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into employee_children (employee_id, child_id)" + " values (?, ?)", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setLong(1, employee.getId());
+            preparedStatement.setLong(2, child.getId());
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            while (resultSet.next()) {
+                employee.setId(resultSet.getLong(1));
+            }
+        } catch (SQLException e) {
+            throw new RequestException("Unable to create employee-children: ", e);
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+    }
+
     public static List<Employee> mapEmployees(ResultSet resultSet) throws SQLException {
         List<Employee> employees = new ArrayList<>();
         while (resultSet.next()) {
@@ -108,8 +127,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             }
 
             Employee employee = findById(id, employees);
-            employee.setFirstName(resultSet.getString("parent_name"));
-            employee.setLastName(resultSet.getString("parent_surname"));
+            employee.setFirstName(resultSet.getString("employee_name"));
+            employee.setLastName(resultSet.getString("employee_surname"));
 
             List<Child> children = ChildRepositoryImpl.mapChild(resultSet, employee.getChildren());
             employee.setChildren(children);

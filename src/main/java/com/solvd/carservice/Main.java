@@ -133,10 +133,8 @@ public class Main {
         carService = carServiceService.create(carService);
         LOGGER.info(carService.getId() + " " + carService.getName());
 
-        LOGGER.info("child for following car-service id were found");
-        List<CarService> childCarServices = new ArrayList<>();
-        childCarServices = carServiceService.retrieveAll();
-        childCarServices.forEach(carService1 -> LOGGER.info((carService1.getId())));
+        List<CarService> childCarServices = carServiceService.retrieveAll();
+        LOGGER.info("child for car-services were found above");
     }
 
     private static String wordRandom() {
