@@ -3,8 +3,8 @@ package com.solvd.carservice.service.impl;
 import com.solvd.carservice.domain.CarService;
 import com.solvd.carservice.domain.client.Client;
 import com.solvd.carservice.domain.department.Department;
-import com.solvd.carservice.domain.exception.RequestException;
 import com.solvd.carservice.persistence.CarServiceRepository;
+import com.solvd.carservice.persistence.impl.CarServiceMapperImpl;
 import com.solvd.carservice.persistence.impl.CarServiceRepositoryImpl;
 import com.solvd.carservice.service.CarServiceService;
 import com.solvd.carservice.service.ClientService;
@@ -20,7 +20,8 @@ public class CarServiceServiceImpl implements CarServiceService {
     private final ClientService clientService;
 
     public CarServiceServiceImpl() {
-        this.carServiceRepository = new CarServiceRepositoryImpl();
+//        this.carServiceRepository = new CarServiceRepositoryImpl();
+        this.carServiceRepository = new CarServiceMapperImpl();
         this.departmentService = new DepartmentServiceImpl();
         this.clientService = new ClientServiceImpl();
     }

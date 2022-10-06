@@ -3,6 +3,7 @@ package com.solvd.carservice.service.impl;
 import com.solvd.carservice.domain.employee.Child;
 
 import com.solvd.carservice.persistence.ChildRepository;
+import com.solvd.carservice.persistence.impl.ChildMapperImpl;
 import com.solvd.carservice.persistence.impl.ChildRepositoryImpl;
 import com.solvd.carservice.service.ChildService;
 
@@ -13,7 +14,8 @@ public class ChildServiceImpl implements ChildService {
     private final ChildRepository childRepository;
 
     public ChildServiceImpl() {
-        this.childRepository = new ChildRepositoryImpl();
+//        this.childRepository = new ChildRepositoryImpl();
+        this.childRepository = new ChildMapperImpl();
     }
 
     @Override

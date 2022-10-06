@@ -40,7 +40,7 @@ public class ChildRepositoryImpl implements ChildRepository {
     public void update(Long id, String name) {
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("update children set dob = ? where id = ?");
+            PreparedStatement statement = connection.prepareStatement("update children set firstName = ? where id = ?");
             statement.setString(1, name);
             statement.setLong(2, id);
             statement.executeUpdate();
@@ -71,7 +71,8 @@ public class ChildRepositoryImpl implements ChildRepository {
         List<Child> children;
         Connection connection = connectionPool.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("select ch.firstName as child_name, ch.lastName as child_surname " + "from children ch where ch.name = ?");
+            PreparedStatement statement = connection.prepareStatement("select ch.first_name as child_name, ch.last_name as child_surname " +
+                    "from children ch where ch.name = ?");
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             children = mapChildren(resultSet);

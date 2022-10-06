@@ -3,9 +3,9 @@ package com.solvd.carservice.service.impl;
 import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.persistence.EmployeeRepository;
+import com.solvd.carservice.persistence.impl.EmployeeMapperImpl;
 import com.solvd.carservice.persistence.impl.EmployeeRepositoryImpl;
 import com.solvd.carservice.service.ChildService;
-import com.solvd.carservice.service.EmployeeChildrenService;
 import com.solvd.carservice.service.EmployeeService;
 
 import java.util.List;
@@ -14,12 +14,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final ChildService childService;
-    private final EmployeeChildrenService employeeChildrenService;
 
     public EmployeeServiceImpl() {
-        this.employeeRepository = new EmployeeRepositoryImpl();
+        this.employeeRepository = new EmployeeMapperImpl();
+//        this.employeeRepository = new EmployeeRepositoryImpl();
         this.childService = new ChildServiceImpl();
-        this.employeeChildrenService = new EmployeeChildrenServiceImpl();
     }
 
     @Override
@@ -31,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             List<Child> children = employee.getChildren();
             children.forEach(child -> {
                 childService.create(child);
-                employeeChildrenService.create(employee.getId(), child.getId());
+                employeeRepository.createEmployeeChildren(employee, child);
             });
             employee.setChildren(children);
         }

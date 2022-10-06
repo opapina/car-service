@@ -93,7 +93,7 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
         Connection connection = connectionPool.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement("select c.id as car_service_id, c.name as car_service_name, d.id as department_id, " +
-                    "d.name as department_name, e.id as employee_id, e.first_name as parent_name, e.last_name as parent_surname, ch.id as child_id, ch.first_name as child_name, ch.last_name as child_surname from car_services c " +
+                    "d.name as department_name, e.id as employee_id, e.first_name as employee_name, e.last_name as employee_surname, ch.id as child_id, ch.first_name as child_name, ch.last_name as child_surname from car_services c " +
                     "left join departments d on c.id = d.car_service_id left join employees e on d.id = e.department_id left join employee_children ec " +
                     " on e.id = ec.employee_id left join children ch on ch.id = ec.child_id;");
             ResultSet resultSet = statement.executeQuery();

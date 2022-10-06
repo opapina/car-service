@@ -6,7 +6,7 @@
 
     <groupId>com.solvd</groupId>
     <artifactId>car-service</artifactId>
-    <version>17.0.1-SNAPSHOT</version>
+    <version>18.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -17,6 +17,7 @@
         <apache-commons-lang3-version>3.12.0</apache-commons-lang3-version>
         <apache-commons-io-version>2.11.0</apache-commons-io-version>
         <mysql-connector-java-version>8.0.30</mysql-connector-java-version>
+        <mybatis-version>3.5.11</mybatis-version>
     </properties>
 
     <dependencies>
@@ -45,6 +46,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis-version}</version>
         </dependency>
     </dependencies>
 
