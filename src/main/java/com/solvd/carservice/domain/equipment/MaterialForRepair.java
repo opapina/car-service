@@ -2,7 +2,7 @@ package com.solvd.carservice.domain.equipment;
 
 import java.math.BigDecimal;
 
-public class MaterialForRepair {
+public abstract class MaterialForRepair {
 
     private Long id;
     private String name;
@@ -10,15 +10,14 @@ public class MaterialForRepair {
     private String unit;
     private BigDecimal priceOfUnit;
 
-    public MaterialForRepair(Long id, String name, BigDecimal quantity, String unit, BigDecimal priceOfUnit) {
-        this.id = id;
+    public MaterialForRepair(String name, BigDecimal quantity, String unit, BigDecimal priceOfUnit) {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
         this.priceOfUnit = priceOfUnit;
     }
 
-    public MaterialForRepair(String name, BigDecimal quantity) {
+    public MaterialForRepair() {
     }
 
     public Long getId() {

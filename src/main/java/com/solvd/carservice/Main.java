@@ -5,7 +5,10 @@ import com.solvd.carservice.domain.client.Client;
 import com.solvd.carservice.domain.department.Department;
 import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
+import com.solvd.carservice.domain.equipment.MaterialForRepair;
 import com.solvd.carservice.domain.equipment.Tool;
+import com.solvd.carservice.domain.pattern.Factory;
+import com.solvd.carservice.domain.service.Service;
 import com.solvd.carservice.service.CarServiceService;
 import com.solvd.carservice.service.DepartmentService;
 import com.solvd.carservice.service.impl.CarServiceServiceImpl;
@@ -128,7 +131,11 @@ public class Main {
         carService.setName("Car" + wordRandom());
         carService.setDepartments(Arrays.asList(department1, department2));
 //        carService.setClients(Arrays.asList(client1,client2));
-//
+
+        MaterialForRepair material1 = Factory.getMaterial(Service.Type.ENGINEMAINTENANCE);
+        LOGGER.info("material for Electrical work: " + material1);
+        MaterialForRepair material2 = Factory.getMaterial(Service.Type.CARPAINTING);
+        LOGGER.info("material for Painting work: " + material2);
         CarServiceService carServiceService = new CarServiceServiceImpl();
         carService = carServiceService.create(carService);
         LOGGER.info(carService.getId() + " " + carService.getName());
