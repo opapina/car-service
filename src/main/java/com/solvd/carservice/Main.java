@@ -8,7 +8,9 @@ import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.domain.equipment.MaterialForRepair;
 import com.solvd.carservice.domain.equipment.Tool;
 import com.solvd.carservice.domain.pattern.Factory;
+import com.solvd.carservice.domain.price.DiscountProgram;
 import com.solvd.carservice.domain.service.Service;
+import com.solvd.carservice.domain.vehicle.Car;
 import com.solvd.carservice.service.CarServiceService;
 import com.solvd.carservice.service.DepartmentService;
 import com.solvd.carservice.service.impl.CarServiceServiceImpl;
@@ -115,33 +117,70 @@ public class Main {
       //department2.setTools(Arrays.asList(tool4, tool5, tool6));
 
 
-        Client client1 = new Client();
-        client1.setFirstName("Andrei");
-        client1.setLastName("Bukin");
-        client1.setDob(LocalDate.of(2000,3,10));
-        client1.setRegistrationDate(LocalDate.of(2022,5,20));
+        Client client1 = Client.builder()
+                .firstName("Andrei")
+                .lastName("Bukin")
+                .dob(LocalDate.of(2000,3,10))
+                .registrationDate(LocalDate.of(2022,5,20))
+                .build();
 
-        Client client2 = new Client();
-        client2.setFirstName("Vasyi");
-        client2.setLastName("Bukhankin");
-        client2.setDob(LocalDate.of(2001,5,15));
-        client2.setRegistrationDate(LocalDate.of(2022,6,10));
+        Client client2 = Client.builder()
+               .firstName("Vasyi")
+               .lastName("Bukhankin")
+                .dob(LocalDate.of(2001,5,15))
+                .registrationDate(LocalDate.of(2022,6,10))
+                .build();
 
         CarService carService = new CarService();
         carService.setName("Car" + wordRandom());
         carService.setDepartments(Arrays.asList(department1, department2));
 //        carService.setClients(Arrays.asList(client1,client2));
 
-        MaterialForRepair material1 = Factory.getMaterial(Service.Type.ENGINEMAINTENANCE);
-        LOGGER.info("material for Electrical work: " + material1);
-        MaterialForRepair material2 = Factory.getMaterial(Service.Type.CARPAINTING);
-        LOGGER.info("material for Painting work: " + material2);
         CarServiceService carServiceService = new CarServiceServiceImpl();
         carService = carServiceService.create(carService);
         LOGGER.info(carService.getId() + " " + carService.getName());
 
         List<CarService> childCarServices = carServiceService.retrieveAll();
         LOGGER.info("child for car-services were found above");
+
+        MaterialForRepair material1 = Factory.getMaterial(Service.Type.ENGINEMAINTENANCE);
+        LOGGER.info("material for Electrical work: " + material1);
+        MaterialForRepair material2 = Factory.getMaterial(Service.Type.CARPAINTING);
+        LOGGER.info("material for Painting work: " + material2);
+
+        DiscountProgram silver = new DiscountProgram();
+        silver.setName("SILVER");
+        silver.setDiscount(0.20);
+
+        Car car1 = new Car();
+        car1.setBrand("Mazda");
+        car1.setModel("5");
+
+        Car car2 = new Car();
+        car2.setBrand("BMW");
+        car2.setModel("5");
+
+        Client client = Client.builder()
+                .firstName("Leonid")
+                .lastName("Vlasov")
+                .dob(LocalDate.of(1999, 3, 25))
+                .registrationDate(LocalDate.of(2022, 1, 30))
+                .discountProgram(silver)
+                .build();
+
+        client.toBuilder()
+                .cars(Arrays.asList(car1, car2))
+                .build();
+
+        Client client3 = Client.builder()
+                .firstName("Sasha")
+                .lastName("Kulich")
+                .dob(LocalDate.of(2002, 4, 5))
+                .registrationDate(LocalDate.of(2022, 3, 10))
+                .build();
+
+        LOGGER.info("Client with all info: " + client.toString());
+        LOGGER.info("Client with F,L,dob and registration date: " + client3.toString());
     }
 
     private static String wordRandom() {

@@ -9,10 +9,17 @@ import com.solvd.carservice.domain.service.Service;
 
 import java.math.BigDecimal;
 
+/**
+ * This factory allows to add necessary material for repair car according to type of service
+ * @see Service #Type
+ * In DB all type of service work is constants, and if some of service type was selected, the material
+ * for the corresponding service  will be created automatically
+ */
+
 public class Factory {
 
     public static MaterialForRepair getMaterial (Service.Type serviceType) {
-        MaterialForRepair materialForRepair = null;
+        MaterialForRepair materialForRepair;
         switch (serviceType) {
             case CARPAINTING:
                 materialForRepair = new Paint("carpaint", BigDecimal.valueOf(200.45), "mL", BigDecimal.valueOf(46.56), "red");

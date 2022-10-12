@@ -52,4 +52,15 @@ public class Car {
     public void setServices(List<Service> services) {
         this.services = services;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "model='" + model + '\'' +
+                ", brand='" + brand + '\'' +
+                ", yearCreate=" + yearCreate +
+                ", vinCode='" + vinCode + '\'' +
+                ", services=" + services +
+                '}';
+    }
 }

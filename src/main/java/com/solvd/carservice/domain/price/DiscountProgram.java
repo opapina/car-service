@@ -29,4 +29,13 @@ public class DiscountProgram {
     public void setDiscount(Double discount) {
         this.discount = discount;
     }
+
+    @Override
+    public String toString() {
+        return "DiscountProgram{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", discount=" + discount +
+                '}';
+    }
 }
