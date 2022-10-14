@@ -1,7 +1,6 @@
 package com.solvd.carservice.domain.service;
 
 import com.solvd.carservice.domain.equipment.MaterialForRepair;
-import com.solvd.carservice.domain.price.Price;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,7 +11,6 @@ public class Service {
     private Type name;
     private BigDecimal priceOfHour;
     private Integer workTime;
-    private Price price;
     private List<MaterialForRepair> materialForRepairs;
 
     public enum Type {
@@ -67,13 +65,5 @@ public class Service {
 
     public void setMaterials(List<MaterialForRepair> materialForRepairs) {
         this.materialForRepairs = materialForRepairs;
-    }
-
-    public Price getPrice() {
-        return price;
-    }
-
-    public void setPrice(Price price) {
-        this.price = price;
     }
 }

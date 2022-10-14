@@ -9,6 +9,7 @@ import com.solvd.carservice.domain.equipment.MaterialForRepair;
 import com.solvd.carservice.domain.equipment.Tool;
 import com.solvd.carservice.domain.pattern.Factory;
 import com.solvd.carservice.domain.price.DiscountProgram;
+import com.solvd.carservice.domain.price.Price;
 import com.solvd.carservice.domain.service.Service;
 import com.solvd.carservice.domain.vehicle.Car;
 import com.solvd.carservice.service.CarServiceService;
@@ -18,6 +19,7 @@ import com.solvd.carservice.service.impl.DepartmentServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -181,6 +183,12 @@ public class Main {
 
         LOGGER.info("Client with all info: " + client.toString());
         LOGGER.info("Client with F,L,dob and registration date: " + client3.toString());
+
+        Service service1 = new Service();
+        Service service2 =  new Service();
+        Price price = new Price(Arrays.asList(service1, service2));
+        BigDecimal price1 = price.countPrice();
+        LOGGER.info("For " + car1.toString() + " service price is " + price1);
     }
 
     private static String wordRandom() {
