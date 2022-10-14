@@ -17,7 +17,7 @@ public class Client {
 
     /**
      * @return Client
-     * Allows to create clients with different parameters and update parameters which have the same data type
+     * Allows to create clients with different parameters and update parameters which have the same data type without mistakes
      */
 
     public static ClientBuilder builder() {
