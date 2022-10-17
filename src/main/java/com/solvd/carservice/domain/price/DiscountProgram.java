@@ -10,7 +10,6 @@ public class DiscountProgram {
     private Long id;
     private String name;
     private Double discount;
-    private String phoneNumber;
 
     public void sendSales() {
         LOGGER.info("Send message about sales");
@@ -40,21 +39,12 @@ public class DiscountProgram {
         this.discount = discount;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     @Override
     public String toString() {
         return "DiscountProgram{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", discount=" + discount +
-                ", phoneNumber=" + phoneNumber +
                 '}';
     }
 }

@@ -1,6 +1,8 @@
 package com.solvd.carservice.domain.client;
+import com.solvd.carservice.domain.pattern.listener.EventType;
 import com.solvd.carservice.domain.pattern.listener.IEvent;
 import com.solvd.carservice.domain.price.DiscountProgram;
+import com.solvd.carservice.domain.service.Service;
 import com.solvd.carservice.domain.vehicle.Car;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +19,7 @@ public class Client implements IEvent {
     private String lastName;
     private LocalDate dob;
     private LocalDate registrationDate;
+    private String phoneNumber;
     private DiscountProgram discountProgram;
     private List<Car> cars;
 
@@ -34,9 +37,16 @@ public class Client implements IEvent {
     }
 
     @Override
-    public void sendMessage() {
-        LOGGER.info("Message for client was sent ");
+    public void onPromotion() {
+        LOGGER.info("On promotion " );
     }
+
+    @Override
+    public void onPerformedWork(Client client, List<Service> performedService) {
+        LOGGER.info("On performedWork " );
+
+    }
+
 
     public static class ClientBuilder {
 
@@ -64,6 +74,11 @@ public class Client implements IEvent {
         public ClientBuilder registrationDate (LocalDate registrationDate) {
             this.client.registrationDate = registrationDate;
             return this;
+        }
+
+        public ClientBuilder phoneNumber (String phoneNumber) {
+            this.client.phoneNumber = phoneNumber;
+            return  this;
         }
 
         public ClientBuilder discountProgram  (DiscountProgram discountProgram) {
@@ -137,6 +152,14 @@ public class Client implements IEvent {
         this.discountProgram = discountProgram;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
@@ -145,6 +168,7 @@ public class Client implements IEvent {
                 ", lastName='" + lastName + '\'' +
                 ", dob=" + dob +
                 ", registrationDate=" + registrationDate +
+                ", phoneNumber=" + phoneNumber +
                 ", discountProgram=" + discountProgram +
                 ", cars=" + cars +
                 '}';

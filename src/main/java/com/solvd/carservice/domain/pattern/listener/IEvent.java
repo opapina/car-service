@@ -1,7 +1,14 @@
 package com.solvd.carservice.domain.pattern.listener;
 
+import com.solvd.carservice.domain.client.Client;
+import com.solvd.carservice.domain.service.Service;
+
+import java.util.List;
+
 public interface IEvent {
 
-    void sendMessage();
+    void onPromotion();
+
+    void onPerformedWork(Client client, List<Service> performedService);
 
 }

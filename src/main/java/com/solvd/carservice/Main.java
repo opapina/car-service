@@ -9,6 +9,8 @@ import com.solvd.carservice.domain.equipment.MaterialForRepair;
 import com.solvd.carservice.domain.equipment.Tool;
 import com.solvd.carservice.domain.pattern.ClientDecorator;
 import com.solvd.carservice.domain.pattern.Factory;
+import com.solvd.carservice.domain.pattern.listener.EventHolder;
+import com.solvd.carservice.domain.pattern.listener.EventType;
 import com.solvd.carservice.domain.price.DiscountProgram;
 import com.solvd.carservice.domain.price.Price;
 import com.solvd.carservice.domain.service.Service;
@@ -118,7 +120,7 @@ public class Main {
         Department department2 = new Department();
         department2.setName("Constructor Department");
         department2.setEmployees(Arrays.asList(employee4, employee5));
-      department2.setTools(Arrays.asList(tool4, tool5, tool6));
+        department2.setTools(Arrays.asList(tool4, tool5, tool6));
 
 
         Client client1 = Client.builder()
@@ -188,13 +190,42 @@ public class Main {
 
         Service service1 = new Service(Service.Type.CARPAINTING, 23.50, 16, Collections.singletonList(material2));
         Service service2 =  new Service(Service.Type.ENGINEMAINTENANCE, 3.45, 2, Collections.singletonList(material1));
+        Service service3 = new Service(Service.Type.CARPAINTING, 23.50, 16, Collections.singletonList(material2));
+        Service service4 =  new Service(Service.Type.ENGINEMAINTENANCE, 3.45, 2, Collections.singletonList(material1));
         Price price = new Price(Arrays.asList(service1, service2));
-        Double price1 = price.countPrice();
-        LOGGER.info("For " + car1.toString() + " service price is " + price1);
+        Price price2 = new Price(List.of(service3));
+        Price price3 = new Price(List.of(service4));
+
+        //hardcoded because this list of services will be got from DB when the performedFlag = 1
+        List<Service> performedServices = new ArrayList<>();
+        performedServices.add(service3);
+        performedServices.add(service4);
+
+        car2.setServices(Arrays.asList(service3, service4));
+
+        Double cheque = price.countPrice();
+        LOGGER.info("For " + car1.toString() + " service cheque is " + cheque);
 
         ClientDecorator clientDecorator = new ClientDecorator(silver, car1);
         clientDecorator.receiveSales();
         clientDecorator.move();
+
+        client1.toBuilder()
+                .phoneNumber("+3752977000000")
+                .build();
+
+
+        Client client4 = new Client();
+        List<Client> clients = new ArrayList<>();
+        clients.add(client);
+        clients.add(client1);
+        clients.add(client2);
+        clients.add(client3);
+        clients.add(client4);
+
+        EventHolder.subscription(client1, client1, EventType.PROMOTION);
+        EventHolder.eventMessage(EventType.PROMOTION, clients, performedServices);
+        System.out.println(" ");
     }
 
     private static String wordRandom() {
