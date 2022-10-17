@@ -6,11 +6,11 @@ public abstract class MaterialForRepair {
 
     private Long id;
     private String name;
-    private BigDecimal quantity;
+    private Double quantity;
     private String unit;
-    private BigDecimal priceOfUnit;
+    private Double priceOfUnit;
 
-    public MaterialForRepair(String name, BigDecimal quantity, String unit, BigDecimal priceOfUnit) {
+    public MaterialForRepair(String name, Double quantity, String unit, Double priceOfUnit) {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
@@ -36,11 +36,11 @@ public abstract class MaterialForRepair {
         this.name = name;
     }
 
-    public BigDecimal getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
@@ -52,11 +52,11 @@ public abstract class MaterialForRepair {
         this.unit = unit;
     }
 
-    public BigDecimal getPriceOfUnit() {
+    public Double getPriceOfUnit() {
         return priceOfUnit;
     }
 
-    public void setPriceOfUnit(BigDecimal priceOfUnit) {
+    public void setPriceOfUnit(Double priceOfUnit) {
         this.priceOfUnit = priceOfUnit;
     }
 }

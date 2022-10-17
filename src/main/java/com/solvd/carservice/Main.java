@@ -7,8 +7,10 @@ import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.domain.equipment.MaterialForRepair;
 import com.solvd.carservice.domain.equipment.Tool;
+import com.solvd.carservice.domain.pattern.ClientDecorator;
 import com.solvd.carservice.domain.pattern.Factory;
 import com.solvd.carservice.domain.price.DiscountProgram;
+import com.solvd.carservice.domain.price.Price;
 import com.solvd.carservice.domain.service.Service;
 import com.solvd.carservice.domain.vehicle.Car;
 import com.solvd.carservice.service.CarServiceService;
@@ -18,10 +20,12 @@ import com.solvd.carservice.service.impl.DepartmentServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -114,7 +118,7 @@ public class Main {
         Department department2 = new Department();
         department2.setName("Constructor Department");
         department2.setEmployees(Arrays.asList(employee4, employee5));
-      //department2.setTools(Arrays.asList(tool4, tool5, tool6));
+      department2.setTools(Arrays.asList(tool4, tool5, tool6));
 
 
         Client client1 = Client.builder()
@@ -181,6 +185,16 @@ public class Main {
 
         LOGGER.info("Client with all info: " + client.toString());
         LOGGER.info("Client with F,L,dob and registration date: " + client3.toString());
+
+        Service service1 = new Service(Service.Type.CARPAINTING, 23.50, 16, Collections.singletonList(material2));
+        Service service2 =  new Service(Service.Type.ENGINEMAINTENANCE, 3.45, 2, Collections.singletonList(material1));
+        Price price = new Price(Arrays.asList(service1, service2));
+        Double price1 = price.countPrice();
+        LOGGER.info("For " + car1.toString() + " service price is " + price1);
+
+        ClientDecorator clientDecorator = new ClientDecorator(silver, car1);
+        clientDecorator.receiveSales();
+        clientDecorator.move();
     }
 
     private static String wordRandom() {

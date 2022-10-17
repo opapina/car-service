@@ -1,11 +1,16 @@
 package com.solvd.carservice.domain.client;
+import com.solvd.carservice.domain.pattern.listener.IEvent;
 import com.solvd.carservice.domain.price.DiscountProgram;
 import com.solvd.carservice.domain.vehicle.Car;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class Client {
+public class Client implements IEvent {
+
+    private static final Logger LOGGER = LogManager.getLogger(Client.class);
 
     private Long id;
     private String firstName;
@@ -26,6 +31,11 @@ public class Client {
 
     public ClientBuilder toBuilder() {
         return new ClientBuilder(this);
+    }
+
+    @Override
+    public void sendMessage() {
+        LOGGER.info("Message for client was sent ");
     }
 
     public static class ClientBuilder {
