@@ -7,8 +7,6 @@ import com.solvd.carservice.domain.equipment.material.Paint;
 import com.solvd.carservice.domain.equipment.material.ThermalProtection;
 import com.solvd.carservice.domain.service.Service;
 
-import java.math.BigDecimal;
-
 /**
  * This factory allows to add necessary material for repair car according to type of service
  * @see Service #Type
@@ -22,16 +20,16 @@ public class Factory {
         MaterialForRepair materialForRepair;
         switch (serviceType) {
             case CARPAINTING:
-                materialForRepair = new Paint("carpaint", BigDecimal.valueOf(200.45), "mL", BigDecimal.valueOf(46.56), "red");
+                materialForRepair = new Paint("carpaint",200.45, "mL", 46.56, "red");
                 break;
             case ENGINEMAINTENANCE:
-                materialForRepair = new EngineOil("Shell", BigDecimal.valueOf(5.65),"L", BigDecimal.valueOf(25.30), "diesel");
+                materialForRepair = new EngineOil("Shell",5.65,"L", 25.30, "diesel");
                 break;
             case ELECTRICALMAINTENANCE:
-                materialForRepair = new ThermalProtection("TP", BigDecimal.valueOf(4.78), "mG", BigDecimal.valueOf(1.34), 250);
+                materialForRepair = new ThermalProtection("TP",4.78, "mG", 1.34, 250);
                 break;
             case SUSPENSIONMAINTENANCE:
-                materialForRepair = new Grease("PG", BigDecimal.valueOf(5.66), "mG", BigDecimal.valueOf(0.79), "lanolin");
+                materialForRepair = new Grease("PG", 5.66, "mG", 0.79, "lanolin");
             default:
                 materialForRepair = null;
         }

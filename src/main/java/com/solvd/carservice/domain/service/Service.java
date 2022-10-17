@@ -9,9 +9,17 @@ public class Service {
 
     private Long id;
     private Type name;
-    private BigDecimal priceOfHour;
+    private Double priceOfHour;
     private Integer workTime;
     private List<MaterialForRepair> materialForRepairs;
+
+    public Service(Type name, Double priceOfHour, Integer workTime, List<MaterialForRepair> materialForRepairs) {
+        this.name = name;
+        this.priceOfHour = priceOfHour;
+        this.workTime = workTime;
+        this.materialForRepairs = materialForRepairs;
+
+    }
 
     public enum Type {
         CARPAINTING("carPainting"), ENGINEMAINTENANCE("engineMaintenance"), ELECTRICALMAINTENANCE("electricalMaintenance"), SUSPENSIONMAINTENANCE("suspensionMaintenance");
@@ -43,11 +51,11 @@ public class Service {
         this.name = name;
     }
 
-    public BigDecimal getPriceOfHour() {
+    public Double getPriceOfHour() {
         return priceOfHour;
     }
 
-    public void setPriceOfHour(BigDecimal priceOfHour) {
+    public void setPriceOfHour(Double priceOfHour) {
         this.priceOfHour = priceOfHour;
     }
 
