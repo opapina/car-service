@@ -9,6 +9,6 @@ public interface IEvent {
 
     void onPromotion();
 
-    void onPerformedWork(Client client, List<Service> performedService);
+    void onPerformedWork(List<Client> clients, List<Service> performedService);
 
 }

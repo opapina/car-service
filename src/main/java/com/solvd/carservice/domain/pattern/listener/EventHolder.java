@@ -8,43 +8,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * For all subscribe client can send promotion message
+ * Only for client which service works are completed can send message about performed work
+ */
+
 public class EventHolder {
 
     private static final Map<EventType, List<IEvent>> HOLDER = new HashMap<>();
 
-    public static void subscription(Client client, IEvent event, EventType type) {
+    public static void subscription( IEvent event, EventType type) {
         if (HOLDER.get(type) == null) {
             HOLDER.put(type, new ArrayList<>());
         }
-        if (client.getPhoneNumber() != null) {
-            HOLDER.get(type).add(event);
-        }
+        HOLDER.get(type).add(event);
     }
 
-        public static void eventMessage (EventType type, List<Client> clients, List<Service> performedServices) {
-            List<IEvent> events = HOLDER.get(type);
-            if (events != null) {
-                if (type == EventType.PROMOTION) {
-                    events.forEach(event -> event.onPromotion());
-//                } else {
-//                    events.forEach(event -> event.onPerformedWork(clients, performedServices));
-//                    if (performedServices != null) {
-//                        for (int i = 0; i < performedServices.size(); i++) {
-//                        int numberCar = client.getCars().size();
-//                        for (int j = 0; j < numberCar; j++) {
-//                            int numberService = client.getCars().get(i).getServices().size();
-//                            for (int n = 0; n < numberService; n++) {
-//                                if (client.getCars().get(j).getServices().get(n).getId().equals(performedServices.get(i).getId())) {
-//                                    return;
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            events.forEach(event -> event.onEvent(client, type, performedServices));
-//
-                }
+    public static void eventMessage(EventType type, List<Client> clients, List<Service> performedServices) {
+        List<IEvent> events = HOLDER.get(type);
+        if (events != null) {
+            if (type == EventType.PROMOTION) {
+                events.forEach(IEvent::onPromotion);
+            }
+            else if (type == EventType.PERFORMEDWORK) {
+                events.get(0).onPerformedWork(clients, performedServices);
             }
         }
+    }
 }

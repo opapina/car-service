@@ -1,5 +1,4 @@
 package com.solvd.carservice.domain.client;
-import com.solvd.carservice.domain.pattern.listener.EventType;
 import com.solvd.carservice.domain.pattern.listener.IEvent;
 import com.solvd.carservice.domain.price.DiscountProgram;
 import com.solvd.carservice.domain.service.Service;
@@ -38,15 +37,28 @@ public class Client implements IEvent {
 
     @Override
     public void onPromotion() {
-        LOGGER.info("On promotion " );
+        LOGGER.info("On promotion: promotion is actual till Saturday" );
     }
 
     @Override
-    public void onPerformedWork(Client client, List<Service> performedService) {
-        LOGGER.info("On performedWork " );
-
+    public void onPerformedWork(List<Client> clients, List<Service> performedServices) {
+        if (performedServices != null) {
+            clients.forEach(client -> {
+                if (client.cars != null) {
+                    client.cars.forEach(car -> {
+                        List<Service> services = car.getServices();
+                        if (services != null) {
+                            performedServices.forEach(performedService -> {
+                                services.stream()
+                                        .filter(service -> service.getId().equals(performedService.getId()))
+                                        .forEach(service -> LOGGER.info("On performed work : services " + service.getId() + " is performed for " + client.firstName + " " + client.lastName));
+                            });
+                        }
+                    });
+                }
+            });
+        }
     }
-
 
     public static class ClientBuilder {
 

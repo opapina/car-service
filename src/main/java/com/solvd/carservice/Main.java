@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -142,12 +143,12 @@ public class Main {
         carService.setDepartments(Arrays.asList(department1, department2));
 //        carService.setClients(Arrays.asList(client1,client2));
 
-        CarServiceService carServiceService = new CarServiceServiceImpl();
-        carService = carServiceService.create(carService);
-        LOGGER.info(carService.getId() + " " + carService.getName());
-
-        List<CarService> childCarServices = carServiceService.retrieveAll();
-        LOGGER.info("child for car-services were found above");
+//        CarServiceService carServiceService = new CarServiceServiceImpl();
+//        carService = carServiceService.create(carService);
+//        LOGGER.info(carService.getId() + " " + carService.getName());
+//
+//        List<CarService> childCarServices = carServiceService.retrieveAll();
+//        LOGGER.info("child for car-services were found above");
 
         MaterialForRepair material1 = Factory.getMaterial(Service.Type.ENGINEMAINTENANCE);
         LOGGER.info("material for Electrical work: " + material1);
@@ -166,7 +167,7 @@ public class Main {
         car2.setBrand("BMW");
         car2.setModel("5");
 
-        Client client = Client.builder()
+        Client client3 = Client.builder()
                 .firstName("Leonid")
                 .lastName("Vlasov")
                 .dob(LocalDate.of(1999, 3, 25))
@@ -174,19 +175,19 @@ public class Main {
                 .discountProgram(silver)
                 .build();
 
-        client.toBuilder()
+        client3.toBuilder()
                 .cars(Arrays.asList(car1, car2))
                 .build();
 
-        Client client3 = Client.builder()
+        Client client4 = Client.builder()
                 .firstName("Sasha")
                 .lastName("Kulich")
                 .dob(LocalDate.of(2002, 4, 5))
                 .registrationDate(LocalDate.of(2022, 3, 10))
                 .build();
 
-        LOGGER.info("Client with all info: " + client.toString());
-        LOGGER.info("Client with F,L,dob and registration date: " + client3.toString());
+        LOGGER.info("Client with all info: " + client3.toString());
+        LOGGER.info("Client with F,L,dob and registration date: " + client4.toString());
 
         Service service1 = new Service(Service.Type.CARPAINTING, 23.50, 16, Collections.singletonList(material2));
         Service service2 =  new Service(Service.Type.ENGINEMAINTENANCE, 3.45, 2, Collections.singletonList(material1));
@@ -197,6 +198,8 @@ public class Main {
         Price price3 = new Price(List.of(service4));
 
         //hardcoded because this list of services will be got from DB when the performedFlag = 1
+        service3.setId(6L);
+        service4.setId(7L);
         List<Service> performedServices = new ArrayList<>();
         performedServices.add(service3);
         performedServices.add(service4);
@@ -215,16 +218,40 @@ public class Main {
                 .build();
 
 
-        Client client4 = new Client();
+        Client client5 = new Client();
+        client5.toBuilder()
+                .phoneNumber("+3753366000000")
+                .cars(Arrays.asList(car1, car2))
+                .build();
+
+        client4.toBuilder()
+                .phoneNumber("+3752555500000")
+                .cars(Arrays.asList(car1, car2))
+                .build();
+
         List<Client> clients = new ArrayList<>();
-        clients.add(client);
         clients.add(client1);
         clients.add(client2);
         clients.add(client3);
         clients.add(client4);
+        clients.add(client5);
 
-        EventHolder.subscription(client1, client1, EventType.PROMOTION);
-        EventHolder.eventMessage(EventType.PROMOTION, clients, performedServices);
+        /**
+         * Subscription creates for all users, which has phoneNumber
+         */
+        List<Client> subscribedClients;
+        clients.stream()
+                .filter (client -> (client.getPhoneNumber() != null))
+                .forEach(client -> {
+                    EventHolder.subscription(client, EventType.PROMOTION);
+                    EventHolder.subscription(client, EventType.PERFORMEDWORK);
+                });
+        subscribedClients = clients.stream()
+                        .filter(client -> (client.getPhoneNumber() != null))
+                                .collect(Collectors.toList());
+
+        EventHolder.eventMessage(EventType.PROMOTION, subscribedClients, performedServices);
+        EventHolder.eventMessage(EventType.PERFORMEDWORK, subscribedClients, performedServices);
         System.out.println(" ");
     }
 
