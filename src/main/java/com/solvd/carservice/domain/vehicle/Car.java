@@ -1,11 +1,19 @@
 package com.solvd.carservice.domain.vehicle;
 
 import com.solvd.carservice.domain.service.Service;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class Car {
+
+    private static final Logger LOGGER = LogManager.getLogger(Car.class);
+
+    public void move() {
+        LOGGER.info("Car moves straight along");
+    }
 
     private String model;
     private String brand;
@@ -51,5 +59,16 @@ public class Car {
 
     public void setServices(List<Service> services) {
         this.services = services;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "model='" + model + '\'' +
+                ", brand='" + brand + '\'' +
+                ", yearCreate=" + yearCreate +
+                ", vinCode='" + vinCode + '\'' +
+                ", services=" + services +
+                '}';
     }
 }

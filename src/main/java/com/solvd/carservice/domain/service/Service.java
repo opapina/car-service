@@ -1,19 +1,24 @@
 package com.solvd.carservice.domain.service;
 
-import com.solvd.carservice.domain.equipment.Material;
-import com.solvd.carservice.domain.price.Price;
+import com.solvd.carservice.domain.equipment.MaterialForRepair;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Service {
 
     private Long id;
     private Type name;
-    private BigDecimal priceOfHour;
+    private Double priceOfHour;
     private Integer workTime;
-    private Price price;
-    private List<Material> materials;
+    private List<MaterialForRepair> materialForRepairs;
+
+    public Service(Type name, Double priceOfHour, Integer workTime, List<MaterialForRepair> materialForRepairs) {
+        this.name = name;
+        this.priceOfHour = priceOfHour;
+        this.workTime = workTime;
+        this.materialForRepairs = materialForRepairs;
+
+    }
 
     public enum Type {
         CARPAINTING("carPainting"), ENGINEMAINTENANCE("engineMaintenance"), ELECTRICALMAINTENANCE("electricalMaintenance"), SUSPENSIONMAINTENANCE("suspensionMaintenance");
@@ -45,11 +50,11 @@ public class Service {
         this.name = name;
     }
 
-    public BigDecimal getPriceOfHour() {
+    public Double getPriceOfHour() {
         return priceOfHour;
     }
 
-    public void setPriceOfHour(BigDecimal priceOfHour) {
+    public void setPriceOfHour(Double priceOfHour) {
         this.priceOfHour = priceOfHour;
     }
 
@@ -61,19 +66,11 @@ public class Service {
         this.workTime = workTime;
     }
 
-    public List<Material> getMaterials() {
-        return materials;
+    public List<MaterialForRepair> getMaterials() {
+        return materialForRepairs;
     }
 
-    public void setMaterials(List<Material> materials) {
-        this.materials = materials;
-    }
-
-    public Price getPrice() {
-        return price;
-    }
-
-    public void setPrice(Price price) {
-        this.price = price;
+    public void setMaterials(List<MaterialForRepair> materialForRepairs) {
+        this.materialForRepairs = materialForRepairs;
     }
 }
