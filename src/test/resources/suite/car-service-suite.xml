@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "Verify Car-service logic when connect with DB">
+
+    <test name = "Employee test">
+        <classes>
+            <class name = "com.solvd.carservice.EmployeeTest" />
+        </classes>
+    </test>
+
+    <test name = "exampletest2">
+        <classes>
+            <class name = "com.solvd.carservice.EmployeeTest" />
+        </classes>
+    </test>
+
+</suite>
