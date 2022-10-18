@@ -7,6 +7,8 @@ import com.solvd.carservice.domain.employee.Child;
 import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.domain.equipment.MaterialForRepair;
 import com.solvd.carservice.domain.equipment.Tool;
+import com.solvd.carservice.domain.equipment.material.Paint;
+import com.solvd.carservice.domain.equipment.material.ThermalProtection;
 import com.solvd.carservice.domain.pattern.ClientDecorator;
 import com.solvd.carservice.domain.pattern.Factory;
 import com.solvd.carservice.domain.pattern.listener.EventHolder;
@@ -16,13 +18,10 @@ import com.solvd.carservice.domain.price.Price;
 import com.solvd.carservice.domain.service.Service;
 import com.solvd.carservice.domain.vehicle.Car;
 import com.solvd.carservice.service.CarServiceService;
-import com.solvd.carservice.service.DepartmentService;
 import com.solvd.carservice.service.impl.CarServiceServiceImpl;
-import com.solvd.carservice.service.impl.DepartmentServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,23 +38,22 @@ public class Main {
         Child child1 = new Child();
         child1.setFirstName("Nina");
         child1.setLastName("Ivanova");
-        child1.setDob(LocalDate.of(2016,7,7));
+        child1.setDob(LocalDate.of(2016, 7, 7));
 
         Child child2 = new Child();
         child2.setFirstName("Anna");
         child2.setLastName("Ivanova");
-        child2.setDob(LocalDate.of(2011,7,7));
+        child2.setDob(LocalDate.of(2011, 7, 7));
 
         Child child3 = new Child();
         child3.setFirstName("Ivan");
         child3.setLastName("Petrov");
-        child3.setDob(LocalDate.of(2017,8,8));
-
+        child3.setDob(LocalDate.of(2017, 8, 8));
 
         Employee employee1 = new Employee();
         employee1.setFirstName("Petr");
         employee1.setLastName("Petrov (" + wordRandom() + ")");
-        employee1.setDob(LocalDate.of(1999,5,12));
+        employee1.setDob(LocalDate.of(1999, 5, 12));
         employee1.setExperience(5);
         employee1.setProfession("designer");
         employee1.setChildren(List.of(child3));
@@ -63,29 +61,29 @@ public class Main {
         Employee employee2 = new Employee();
         employee2.setFirstName("Ivan");
         employee2.setLastName("Ivanov (" + wordRandom() + ")");
-        employee2.setDob(LocalDate.of(2000,6,13));
+        employee2.setDob(LocalDate.of(2000, 6, 13));
         employee2.setExperience(2);
         employee2.setProfession("designer");
-        employee2.setChildren(Arrays.asList(child1,child2));
+        employee2.setChildren(Arrays.asList(child1, child2));
 
         Employee employee3 = new Employee();
         employee3.setFirstName("Diana");
         employee3.setLastName("Ivanova (" + wordRandom() + ")");
-        employee3.setDob(LocalDate.of(2001,7,14));
+        employee3.setDob(LocalDate.of(2001, 7, 14));
         employee3.setExperience(4);
         employee3.setProfession("designer");
 
         Employee employee4 = new Employee();
         employee4.setFirstName("Misha");
         employee4.setLastName("Shustov (" + wordRandom() + ")");
-        employee4.setDob(LocalDate.of(2002,4,5));
+        employee4.setDob(LocalDate.of(2002, 4, 5));
         employee4.setExperience(5);
         employee4.setProfession("constructor");
 
         Employee employee5 = new Employee();
         employee5.setFirstName("Irina");
         employee5.setLastName("Petrova (" + wordRandom() + ")");
-        employee5.setDob(LocalDate.of(2003,3,10));
+        employee5.setDob(LocalDate.of(2003, 3, 10));
         employee5.setExperience(2);
         employee5.setProfession("constructor");
 
@@ -123,32 +121,31 @@ public class Main {
         department2.setEmployees(Arrays.asList(employee4, employee5));
         department2.setTools(Arrays.asList(tool4, tool5, tool6));
 
-
         Client client1 = Client.builder()
                 .firstName("Andrei")
                 .lastName("Bukin")
-                .dob(LocalDate.of(2000,3,10))
-                .registrationDate(LocalDate.of(2022,5,20))
+                .dob(LocalDate.of(2000, 3, 10))
+                .registrationDate(LocalDate.of(2022, 5, 20))
                 .build();
 
         Client client2 = Client.builder()
-               .firstName("Vasyi")
-               .lastName("Bukhankin")
-                .dob(LocalDate.of(2001,5,15))
-                .registrationDate(LocalDate.of(2022,6,10))
+                .firstName("Vasyi")
+                .lastName("Bukhankin")
+                .dob(LocalDate.of(2001, 5, 15))
+                .registrationDate(LocalDate.of(2022, 6, 10))
                 .build();
 
         CarService carService = new CarService();
         carService.setName("Car" + wordRandom());
         carService.setDepartments(Arrays.asList(department1, department2));
-//        carService.setClients(Arrays.asList(client1,client2));
+        carService.setClients(Arrays.asList(client1,client2));
 
-//        CarServiceService carServiceService = new CarServiceServiceImpl();
-//        carService = carServiceService.create(carService);
-//        LOGGER.info(carService.getId() + " " + carService.getName());
-//
-//        List<CarService> childCarServices = carServiceService.retrieveAll();
-//        LOGGER.info("child for car-services were found above");
+        CarServiceService carServiceService = new CarServiceServiceImpl();
+        carService = carServiceService.create(carService);
+        LOGGER.info(carService.getId() + " " + carService.getName());
+
+        List<CarService> childCarServices = carServiceService.retrieveAll();
+        LOGGER.info("child for car-services were found above");
 
         MaterialForRepair material1 = Factory.getMaterial(Service.Type.ENGINEMAINTENANCE);
         LOGGER.info("material for Electrical work: " + material1);
@@ -190,9 +187,9 @@ public class Main {
         LOGGER.info("Client with F,L,dob and registration date: " + client4.toString());
 
         Service service1 = new Service(Service.Type.CARPAINTING, 23.50, 16, Collections.singletonList(material2));
-        Service service2 =  new Service(Service.Type.ENGINEMAINTENANCE, 3.45, 2, Collections.singletonList(material1));
+        Service service2 = new Service(Service.Type.ENGINEMAINTENANCE, 3.45, 2, Collections.singletonList(material1));
         Service service3 = new Service(Service.Type.CARPAINTING, 23.50, 16, Collections.singletonList(material2));
-        Service service4 =  new Service(Service.Type.ENGINEMAINTENANCE, 3.45, 2, Collections.singletonList(material1));
+        Service service4 = new Service(Service.Type.ENGINEMAINTENANCE, 3.45, 2, Collections.singletonList(material1));
         Price price = new Price(Arrays.asList(service1, service2));
         Price price2 = new Price(List.of(service3));
         Price price3 = new Price(List.of(service4));
@@ -217,7 +214,6 @@ public class Main {
                 .phoneNumber("+3752977000000")
                 .build();
 
-
         Client client5 = new Client();
         client5.toBuilder()
                 .phoneNumber("+3753366000000")
@@ -241,18 +237,28 @@ public class Main {
          */
         List<Client> subscribedClients;
         clients.stream()
-                .filter (client -> (client.getPhoneNumber() != null))
+                .filter(client -> (client.getPhoneNumber() != null))
                 .forEach(client -> {
                     EventHolder.subscription(client, EventType.PROMOTION);
                     EventHolder.subscription(client, EventType.PERFORMEDWORK);
                 });
         subscribedClients = clients.stream()
-                        .filter(client -> (client.getPhoneNumber() != null))
-                                .collect(Collectors.toList());
+                .filter(client -> (client.getPhoneNumber() != null))
+                .collect(Collectors.toList());
 
         EventHolder.eventMessage(EventType.PROMOTION, subscribedClients, performedServices);
         EventHolder.eventMessage(EventType.PERFORMEDWORK, subscribedClients, performedServices);
-        System.out.println(" ");
+
+        MaterialForRepair material = new MaterialForRepair();
+        material.setiMaterial(new Paint());
+        material.getiMaterial().put();
+        material.getiMaterial().dry();
+
+        material.setiMaterial(new ThermalProtection());
+        material.getiMaterial().put();
+        material.getiMaterial().dry();
+        material.getiMaterial().put();
+        material.getiMaterial().dry();
     }
 
     private static String wordRandom() {
@@ -274,5 +280,3 @@ public class Main {
         return b;
     }
 }
-
-

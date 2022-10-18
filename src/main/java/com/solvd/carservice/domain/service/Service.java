@@ -2,7 +2,6 @@ package com.solvd.carservice.domain.service;
 
 import com.solvd.carservice.domain.equipment.MaterialForRepair;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Service {

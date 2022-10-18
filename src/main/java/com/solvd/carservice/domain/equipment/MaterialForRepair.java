@@ -1,14 +1,16 @@
 package com.solvd.carservice.domain.equipment;
 
-import java.math.BigDecimal;
+import com.solvd.carservice.domain.pattern.strategy.IMaterial;
 
-public abstract class MaterialForRepair {
+public class MaterialForRepair {
 
     private Long id;
     private String name;
     private Double quantity;
     private String unit;
     private Double priceOfUnit;
+
+    private IMaterial iMaterial;
 
     public MaterialForRepair(String name, Double quantity, String unit, Double priceOfUnit) {
         this.name = name;
@@ -58,5 +60,13 @@ public abstract class MaterialForRepair {
 
     public void setPriceOfUnit(Double priceOfUnit) {
         this.priceOfUnit = priceOfUnit;
+    }
+
+    public IMaterial getiMaterial() {
+        return iMaterial;
+    }
+
+    public void setiMaterial(IMaterial iMaterial) {
+        this.iMaterial = iMaterial;
     }
 }
