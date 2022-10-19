@@ -41,6 +41,13 @@ public class DepartmentMapperImpl implements DepartmentRepository {
     }
 
     @Override
+    public List<Department> findByCarServiceId(Long id) {try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
+        DepartmentRepository departmentRepository = session.getMapper(DepartmentRepository.class);
+        return departmentRepository.findByCarServiceId(id);
+    }
+    }
+
+    @Override
     public List<Department> findById(Long id) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
             DepartmentRepository departmentRepository = session.getMapper(DepartmentRepository.class);

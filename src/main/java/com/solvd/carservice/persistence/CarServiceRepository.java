@@ -15,6 +15,8 @@ public interface CarServiceRepository {
 
     void delete(Long id);
 
-   List<CarService> findAllLeft();
+    List<CarService> findAllLeft();
+
+    List<CarService> findById(Long id);
 
 }

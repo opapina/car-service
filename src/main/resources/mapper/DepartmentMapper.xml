@@ -7,11 +7,15 @@
     </insert>
 
     <select id="findByName" resultMap="DepartmentResultMap">
-        select d.id as department_id, d.name as department_name from Departments d where d.name like #{name}
+        select d.id as department_id, d.name as department_name from Departments d where d.name = #{name}
+    </select>
+
+    <select id="findByCarServiceId" resultMap="DepartmentResultMap">
+        select d.id as department_id, d.name as department_name from Departments d where d.car_service_id = #{car_service_id}
     </select>
 
     <select id="findById" resultMap="DepartmentResultMap">
-        select d.id as department_id, d.name as department_name from Departments d where d.car_service_id = #{car_service_id}
+        select d.id as department_id, d.name as department_name from Departments d where d.id = #{id}
     </select>
 
     <update id="update">
@@ -24,7 +28,7 @@
 
     <resultMap id="DepartmentResultMap" type="com.solvd.carservice.domain.department.Department" autoMapping="false">
         <id property="id" column="department_id"/>
-        <result property="name" column="name"/>
+        <result property="name" column="department_name"/>
         <collection property="employees" resultMap="com.solvd.carservice.persistence.EmployeeRepository.EmployeeResultMap"/>
     </resultMap>
 

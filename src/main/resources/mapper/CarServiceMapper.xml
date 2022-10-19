@@ -10,6 +10,10 @@
         Select c.id as car_service_id, c.name as car_service_name from Car_services c where c.name = #{name}
     </select>
 
+    <select id="findById" resultMap="CarServiceResultMap">
+        Select c.id as car_service_id, c.name as car_service_name from Car_services c where c.id = #{id}
+    </select>
+
     <select id="findAllLeft" resultMap="CarServiceResultMap">
         Select c.id as car_service_id, c.name as car_service_name, d.id as department_id,
         d.name as department_name, e.id as employee_id, e.first_name as employee_name, e.last_name as employee_surname,

@@ -12,6 +12,8 @@ public interface DepartmentService {
 
     void deleteById(Long id);
 
+    List<Department> selectById(Long id);
+
     List<Department> selectByCarServiceId(Long id);
 
     List<Department> selectByName(String name);

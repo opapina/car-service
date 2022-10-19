@@ -88,7 +88,28 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
         return departments;
     }
 
-    public List<Department> findById(Long carServiceId) {
+    @Override
+    public List<Department> findById(Long id) {
+        Department department;
+        Connection connection = connectionPool.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select d.id as department_id, d.name as department_name from departments d where d.id = ?");
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            department = (Department) mapDepartments(resultSet);
+            while (resultSet.next()) {
+                id = resultSet.getLong("department_id");
+                String serviceName = resultSet.getString("department_name");
+            }
+        } catch (SQLException e) {
+            throw new RequestException("Cannot find department");
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return null;
+    }
+
+    public List<Department> findByCarServiceId(Long carServiceId) {
         List<Department> departments;
         Connection connection = connectionPool.getConnection();
         try {

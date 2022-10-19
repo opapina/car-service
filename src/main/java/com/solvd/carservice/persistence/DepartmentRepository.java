@@ -15,6 +15,8 @@ public interface DepartmentRepository {
 
     List<Department> findByName(String name);
 
+    List<Department> findByCarServiceId(Long id);
+
     List<Department> findById(Long id);
 
 }

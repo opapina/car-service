@@ -4,16 +4,25 @@ import com.solvd.carservice.domain.employee.Employee;
 import com.solvd.carservice.service.EmployeeService;
 import com.solvd.carservice.service.impl.EmployeeServiceImpl;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.LocalDate;
 
 public class EmployeeTest {
 
     @BeforeMethod
-    private void setup() {
-        System.out.println("Before method ");
+    public void setup() {
+        System.out.println("Before method Employee Test");
+    }
+
+    @BeforeClass
+    public void setupClass() {
+        System.out.println("Before class Employee Test");
+    }
+
+    @BeforeTest
+    public void setupTest() {
+        System.out.println("Before test Employee Test");
     }
 
     @Test(testName = "Verify that first name is not null")
@@ -58,5 +67,15 @@ public class EmployeeTest {
         employee = employeeService.create(employee, 3L);
 
         Assert.assertNotNull(employee.getId(), "Employee id is null");
+    }
+
+    @AfterClass
+    public void setupAfterClass() {
+        System.out.println("After class Employee Test");
+    }
+
+    @AfterMethod
+    public void setupAfterMethod() {
+        System.out.println("After method Employee Test");
     }
 }

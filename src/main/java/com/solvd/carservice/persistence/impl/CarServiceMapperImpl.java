@@ -48,4 +48,12 @@ public class CarServiceMapperImpl implements CarServiceRepository {
             return carServiceRepository.findAllLeft();
         }
     }
+
+    @Override
+    public List<CarService> findById(Long id) {
+        try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
+            CarServiceRepository carServiceRepository = session.getMapper(CarServiceRepository.class);
+            return carServiceRepository.findById(id);
+        }
+    }
 }

@@ -1,17 +1,25 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name = "Verify Car-service logic when connect with DB">
+<suite name = "Verify Car-service connection DB working">
 
     <test name = "Employee test">
         <classes>
             <class name = "com.solvd.carservice.EmployeeTest" />
+            <class name = "com.solvd.carservice.EmployeeFindTest" />
+        </classes>
+
+    </test>
+
+    <test name = "Department test">
+        <classes>
+            <class name = "com.solvd.carservice.DepartmentTest" />
         </classes>
     </test>
 
-    <test name = "exampletest2">
+    <test name = "Car service test">
         <classes>
-            <class name = "com.solvd.carservice.EmployeeTest" />
+            <class name = "com.solvd.carservice.CarServiceTest" />
         </classes>
     </test>
 
