@@ -90,7 +90,7 @@ public class EmployeeTest {
         Employee employee = new Employee();
         employee.setFirstName("Leonid");
         employee.setLastName("Komlev");
-        employee.setDob(LocalDate.of(1999, 5, 12));
+        employee.setDob(LocalDate.of(1990, 5, 12));
         employee.setExperience(5);
         employee.setProfession("designer");
         employee.setChildren(Arrays.asList(child1, child2));

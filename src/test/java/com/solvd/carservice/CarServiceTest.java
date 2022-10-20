@@ -8,6 +8,7 @@ import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
+import java.util.Random;
 
 public class CarServiceTest {
 
@@ -51,7 +52,7 @@ public class CarServiceTest {
 
         SoftAssert softAssert = new SoftAssert();
         carServices.forEach(carService -> {
-            Assert.assertNull(carService, "Car service with id wasn't delete " + carService.getId());
+            softAssert.assertNull(carService, "Car service with id wasn't delete " + carService.getId());
         });
 
         softAssert.assertAll();
@@ -64,10 +65,27 @@ public class CarServiceTest {
 
         SoftAssert softAssert = new SoftAssert();
         carServices.forEach(carService -> {
-            Assert.assertNotNull(carService.getName(), "Car service name  is null " + carService.getId());
+            softAssert.assertNotNull(carService.getName(), "Car service name  is null " + carService.getId());
         });
 
         softAssert.assertAll();
+    }
+
+    @Test(testName = "Verify Car service name will be updated")
+    public void verifyCarServiceUpdatedById() {
+        CarServiceService carServiceService = new CarServiceServiceImpl();
+        List<CarService> carServices = carServiceService.selectById(17L);
+        String previousName = carServices.get(0).getName();
+
+        Random random = new Random();
+        char symbol = (char)(random.nextInt(26) + 'A');
+        String nameForUpdate = previousName + symbol;
+
+        carServiceService.update(carServices.get(0), nameForUpdate);
+        List<CarService> carServicesModified = carServiceService.selectById(17L);
+        String newName = carServicesModified.get(0).getName();
+
+        Assert.assertNotEquals(newName, previousName, "Name wasn't updated");
     }
 
     @AfterTest
