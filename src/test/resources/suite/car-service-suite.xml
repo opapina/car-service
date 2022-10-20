@@ -1,14 +1,13 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name = "Verify Car-service connection DB working">
+<suite name = "Verify Car-service connection DB working" parallel="methods" thread-count="5">
 
     <test name = "Employee test">
         <classes>
             <class name = "com.solvd.carservice.EmployeeTest" />
             <class name = "com.solvd.carservice.EmployeeFindTest" />
         </classes>
-
     </test>
 
     <test name = "Department test">
