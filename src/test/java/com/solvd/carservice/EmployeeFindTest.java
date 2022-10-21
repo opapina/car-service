@@ -27,15 +27,14 @@ public class EmployeeFindTest {
     }
 
     @Test(testName = "Verify that all Employee according to profession will be found", dataProvider = "professionNames")
-    public void verifyFindByProfession(String profession) {
+    public void verifyFindByProfessionTest (String profession) {
         List<Employee> employees;
         EmployeeService employeeService = new EmployeeServiceImpl();
         employees = employeeService.selectByProfession(profession);
 
         SoftAssert softAssert = new SoftAssert();
-        employees.forEach(employee -> {
-            softAssert.assertEquals(employee.getProfession(), profession, "Profession doesn't match " + employee.getId());
-        });
+        employees.forEach(employee ->
+            softAssert.assertEquals(employee.getProfession(), profession, "Profession doesn't match " + employee.getId()));
 
         softAssert.assertAll();
     }

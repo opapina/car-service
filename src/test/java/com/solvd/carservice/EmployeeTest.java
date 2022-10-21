@@ -32,7 +32,7 @@ public class EmployeeTest {
     }
 
     @Test(testName = "Verify that first name is not null")
-    public void verifyEmployeeHasFirstName() {
+    public void verifyEmployeeHasFirstNameTest() {
         Employee employee = new Employee();
         employee.setFirstName("Leonid");
         employee.setLastName("Petrov");
@@ -46,7 +46,7 @@ public class EmployeeTest {
     }
 
     @Test(testName = "Verify that last name is not null")
-    public void verifyEmployeeHasLastName() {
+    public void verifyEmployeeHasLastNameTest() {
         Employee employee = new Employee();
         employee.setFirstName("Leonid");
         employee.setLastName("Petrov");
@@ -61,7 +61,7 @@ public class EmployeeTest {
     }
 
     @Test(testName = "Verify that id is not null after create employee")
-    public void verifyEmployeeIdNotEmptyOnCreate() {
+    public void verifyEmployeeIdNotEmptyOnCreateTest() {
         Employee employee = new Employee();
         employee.setFirstName("Leonid");
         employee.setLastName("Petrov");
@@ -76,7 +76,7 @@ public class EmployeeTest {
     }
 
     @Test(testName = "Verify that during creation employee children with Id will be created accordingly")
-    public void verifyEmployeeChildOnCreate() {
+    public void verifyEmployeeChildOnCreateTest() {
         Child child1 = new Child();
         child1.setFirstName("Anya");
         child1.setLastName("Komleva");

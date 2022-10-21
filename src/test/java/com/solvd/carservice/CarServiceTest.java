@@ -45,7 +45,7 @@ public class CarServiceTest {
     }
 
     @Test(testName = "Verify delete by id", dataProvider = "ids")
-    public void verifyCarServiceOnDeleteId (Long id) {
+    public void verifyCarServiceOnDeleteIdTest (Long id) {
         CarServiceService carServiceService = new CarServiceServiceImpl();
         carServiceService.deleteById(id);
         List<CarService> carServices = carServiceService.selectById(id);
@@ -59,22 +59,21 @@ public class CarServiceTest {
     }
 
     @Test(testName = "Verify Name car service is not null", dataProvider = "carServiceIds")
-    public void verifyCarServiceNameNotNull(Long id) {
+    public void verifyCarServiceNameNotNullTest(Long id) {
         CarServiceService carServiceService = new CarServiceServiceImpl();
         List<CarService> carServices = carServiceService.selectById(id);
 
         SoftAssert softAssert = new SoftAssert();
-        carServices.forEach(carService -> {
-            softAssert.assertNotNull(carService.getName(), "Car service name  is null " + carService.getId());
-        });
+        carServices.forEach(carService ->
+            softAssert.assertNotNull(carService.getName(), "Car service name  is null " + carService.getId()));
 
         softAssert.assertAll();
     }
 
     @Test(testName = "Verify Car service name will be updated")
-    public void verifyCarServiceUpdatedById() {
+    public void verifyCarServiceUpdatedByIdTest() {
         CarServiceService carServiceService = new CarServiceServiceImpl();
-        List<CarService> carServices = carServiceService.selectById(17L);
+        List<CarService> carServices = carServiceService.selectById(276L);
         String previousName = carServices.get(0).getName();
 
         Random random = new Random();
@@ -82,7 +81,7 @@ public class CarServiceTest {
         String nameForUpdate = previousName + symbol;
 
         carServiceService.update(carServices.get(0), nameForUpdate);
-        List<CarService> carServicesModified = carServiceService.selectById(17L);
+        List<CarService> carServicesModified = carServiceService.selectById(276L);
         String newName = carServicesModified.get(0).getName();
 
         Assert.assertNotEquals(newName, previousName, "Name wasn't updated");

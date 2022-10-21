@@ -36,40 +36,37 @@ public class DepartmentTest {
         };
     }
     @Test(testName = "Verify delete by id", dataProvider = "ids", enabled = false)
-    public void verifyDepartmentOnDeleteId (Long id) {
+    public void verifyDepartmentOnDeleteIdTest (Long id) {
         DepartmentService departmentService = new DepartmentServiceImpl();
         departmentService.deleteById(id);
         List<Department> departments = departmentService.selectById(id);
 
         SoftAssert softAssert = new SoftAssert();
-        departments.forEach(department -> {
-            Assert.assertNull(department, "Department with id wasn't delete " + department.getId());
-        });
+        departments.forEach(department ->
+            softAssert.assertNull(department, "Department with id wasn't delete " + department.getId()));
 
         softAssert.assertAll();
     }
 
     @Test(testName = "Verify that painting department in name will be found")
-    public void verifyDepartmentOnFindByName () {
+    public void verifyDepartmentOnFindByNameTest () {
         DepartmentService departmentService = new DepartmentServiceImpl();
         List<Department> departments = departmentService.selectByName("painting department");
 
         SoftAssert softAssert = new SoftAssert();
-        departments.forEach(department -> {
-            softAssert.assertEquals(department.getName(), "painting department", "Painting departments weren't found");
-        });
+        departments.forEach(department ->
+                softAssert.assertEquals(department.getName(), "painting department", "Painting departments weren't found"));
 
         softAssert.assertAll();
     }
 
     @Test(testName = "Verify than found Department name is not empty", dataProvider = "ids")
-    public void verifyDepartmentNameIsNotEmpty (Long id) {
+    public void verifyDepartmentNameIsNotEmptyTest (Long id) {
         DepartmentService departmentService = new DepartmentServiceImpl();
         List<Department> departments = departmentService.selectById(id);
         SoftAssert softAssert = new SoftAssert();
-        departments.forEach(department -> {
-            softAssert.assertNotNull(department.getName(), "Department name is null");
-        });
+        departments.forEach(department ->
+                softAssert.assertNotNull(department.getName(), "Department name is null"));
 
         softAssert.assertAll();
     }
