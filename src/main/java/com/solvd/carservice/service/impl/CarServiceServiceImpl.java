@@ -64,4 +64,9 @@ public class CarServiceServiceImpl implements CarServiceService {
     public List<CarService> retrieveAll() {
         return carServiceRepository.findAllLeft();
     }
+
+    @Override
+    public List<CarService> selectById(Long id) {
+        return carServiceRepository.findById(id);
+    }
 }

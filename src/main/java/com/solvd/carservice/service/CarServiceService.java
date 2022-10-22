@@ -16,4 +16,6 @@ public interface CarServiceService {
 
     List<CarService> retrieveAll();
 
+    List<CarService> selectById(Long id);
+
 }

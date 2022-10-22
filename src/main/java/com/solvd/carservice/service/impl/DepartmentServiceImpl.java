@@ -59,8 +59,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> selectByCarServiceId(Long id) {
+    public List<Department> selectById(Long id) {
         return departmentRepository.findById(id);
+    }
+
+    @Override
+    public List<Department> selectByCarServiceId(Long id) {
+        return departmentRepository.findByCarServiceId(id);
     }
 
     @Override

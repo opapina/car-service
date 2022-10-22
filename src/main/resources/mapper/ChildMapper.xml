@@ -7,7 +7,7 @@
     </insert>
 
     <select id="findByName" resultMap="ChildResultMap">
-        Select ch.first_name as child_name, ch.last_name as child_surname from Children ch where ch.name = #{name}
+        Select ch.id as child_id, ch.first_name as child_name, ch.last_name as child_surname from Children ch where ch.first_name = #{name}
     </select>
 
     <update id="update">

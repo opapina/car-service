@@ -18,7 +18,9 @@ import com.solvd.carservice.domain.price.Price;
 import com.solvd.carservice.domain.service.Service;
 import com.solvd.carservice.domain.vehicle.Car;
 import com.solvd.carservice.service.CarServiceService;
+import com.solvd.carservice.service.DepartmentService;
 import com.solvd.carservice.service.impl.CarServiceServiceImpl;
+import com.solvd.carservice.service.impl.DepartmentServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

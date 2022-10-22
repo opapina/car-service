@@ -106,6 +106,27 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
         return carServices;
     }
 
+    @Override
+    public List<CarService> findById(Long id) {
+        List<CarService> carServices;
+        Connection connection = connectionPool.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select c.id as car_service_id, c.name as car_service_name from car_services c where c.id = ?");
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            carServices = mapCarServices(resultSet);
+            while (resultSet.next()) {
+                id = resultSet.getLong("car_service_id");
+                String serviceName = resultSet.getString("car_service_name");
+            }
+        } catch (SQLException e) {
+            throw new RequestException("Cannot found car service with that name");
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return carServices;
+    }
+
     public static List<CarService> mapCarServices(ResultSet resultSet) throws SQLException {
         List<CarService> carServices = new ArrayList<>();
         while (resultSet.next()) {
