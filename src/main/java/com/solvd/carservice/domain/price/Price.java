@@ -21,7 +21,7 @@ public class Price {
      */
 
     public Double countPrice() {
-        return countPriceService();
+        return countPriceService() + countPriceMaterial();
     }
 
     private Double countPriceService() {

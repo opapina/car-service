@@ -170,30 +170,30 @@ insert into prices(service_id) values (1),(2),(3),(4),(5),(11),(12);
 insert into prices(service_id,performed_flag) values (6,1),(7,1),(8,1),(9,1),(10,1);
 
 -- DELETE
-#delete from tools posissions with id=10,33,25
+#delete from tools positions with id=10,33,25
 delete from tools where id in (10,33,25);
 
-#delete from tools posission with department_id=15
+#delete from tools position with department_id=15
 delete from tools where department_id = 15;
 
 SET SQL_SAFE_UPDATES = 0; -- because safe_updates was turn
 
-#delete from children posissions with first_name 'Yan'
+#delete from children positions with first_name 'Yan'
 SET FOREIGN_KEY_CHECKS = 0;-- to disable fk
 delete from children  where first_name = 'Yan' ;
 SET FOREIGN_KEY_CHECKS = 1; -- to re-enable fk
 
-#delete from cliens posissions with first_name 'Igor'
+#delete from clients positions with first_name 'Igor'
 SET FOREIGN_KEY_CHECKS = 0;-- to disable fk
 delete from clients where first_name = 'Igor';
 SET FOREIGN_KEY_CHECKS = 1; -- to re-enable fk
 
 SET SQL_SAFE_UPDATES = 1; -- return safe_updates
 
-#delete from materials posission with id = 6
+#delete from materials position with id = 6
 delete from materials where id = 6;
 
-#delete from materials posission filler-d
+#delete from materials position filler-d
 delete from materials where name in ('filler-d');
 
 #delete from discount_programs posissions with id=1,11
@@ -202,11 +202,11 @@ delete from discount_programs where id in (1,11);
 #delete from discount_programs posissions with client_id=8
 delete from discount_programs where client_id in (8);
 
-#delete from cars posissions with year_create='2015-06-10'
+#delete from cars positions with year_create='2015-06-10'
 SET FOREIGN_KEY_CHECKS = 0;-- to disable fk
 delete from cars where year_create = '2015-06-10';
 
-#delete from cars posissions with vin_code='ABTY12345GHJK885'
+#delete from cars positions with vin_code='ABTY12345GHJK885'
 delete from cars where vin_code = 'ABTY12345GHJK885';
 SET FOREIGN_KEY_CHECKS = 1; -- to re-enable fk
 
@@ -275,15 +275,15 @@ select c.first_name as name, c.dob as date_of_birth from children c where c.id i
  #select clients from car_service  RenovateCar   and order by lastname
  select c.first_name as name ,c.last_name as surname from clients c where c.car_service_id = 1 order by c.last_name;
  
-  #select clients from clients  which discaunt program SILVER or GOLD  and order by dob
+  #select clients from clients  which discount program SILVER or GOLD  and order by dob
   select c.first_name as name, c.last_name as surname, dob as date_birth from clients c where c.id in 
 					(select client_id from discount_programs d where d.name = 'Silver' or d.name = 'Gold') order by c.dob;
                     
-#select clients from clients and discaunt_programs  which discaunt program SILVER or GOLD  and order by dob with inner join    
+#select clients from clients and discount_programs  which discount program SILVER or GOLD  and order by dob with inner join
 select c.first_name as name, c.last_name as surname, c.dob as date_birth, dp.discount as Discount from clients c 
 inner join discount_programs dp on c.id = dp.client_id where dp.name = 'Silver' or dp.name = 'Gold' order by DATE_BIRTH;
 
-#select clients info(last_name and regictration_date), cars, servises which service materials is null and group by services and 'RI' in name
+#select clients info(last_name and registration_date), cars, services which service materials is null and group by services and 'RI' in name
 select cl.first_name as name, cl.last_name as surname, c.model as car_model, c.brand as car_brand, s.name as service_name from clients cl
  inner join cars c on cl.id = c.client_id inner join service_car sr on c.id = sr.car_id inner join services s on sr.service_id = s.id
  inner join service_material on s.id = service_material.service_id where service_material.material_id is null group by s.name having s.name like '%RI%';
@@ -306,4 +306,3 @@ select c.first_name as name, c.last_name as surname, c.dob as birth_day from chi
 
 
 
-                     
